@@ -32,6 +32,7 @@ GitHub Pages: https://golamkibria.github.io/skill-studio/
 - `app.js` - app state, rendering, navigation, timers, event handling
 - `scoring-utils.js` - scoring helpers and reusable utility logic
 - `assessments.data.js` - question banks and assessment definitions
+- `SESSION_NOTES.md` - local running history of Codex sessions and decisions
 
 ## Quick Start
 
@@ -40,6 +41,24 @@ GitHub Pages: https://golamkibria.github.io/skill-studio/
 3. Select an assessment, choose settings, and click `Start Assessment`.
 
 No build step or dependency install is required.
+
+## Local Session History Workflow
+
+If VS Code extension history is limited, track sessions in `SESSION_NOTES.md`:
+
+1. Copy the session template in that file.
+2. Record goal, key prompts, changes, decisions, and next prompt.
+3. Commit notes with related code changes for traceability.
+
+### One-Command Session Block
+
+From project root, run:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\new-session-note.ps1
+```
+
+This appends a fresh timestamped session block to `SESSION_NOTES.md`.
 
 ## Assessment Data Format
 
