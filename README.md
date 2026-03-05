@@ -2,6 +2,10 @@
 
 Skill Studio is a lightweight, single-page practice exam app built with plain HTML, CSS, and JavaScript. It runs fully in the browser with no backend and keeps session state in memory only.
 
+## Live Demo
+
+GitHub Pages: https://golamkibria.github.io/skill-studio/
+
 ## Features
 
 - Multiple assessment support via `window.assessments`
@@ -104,4 +108,12 @@ window.assessments = assessments;
 
 ## License
 
-No license file is currently included. Add one if you plan to distribute this project.
+This project is licensed under the MIT License. See `LICENSE` for details.
+
+## Security
+
+If you find a security issue, please open a private report via GitHub security advisories or contact the maintainer before public disclosure.
+
+## Maintainer
+
+- GitHub: https://github.com/golamkibria
