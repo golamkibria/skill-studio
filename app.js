@@ -7,7 +7,8 @@ const state = {
   questions: [],
   settings: {
     shuffleOptions: false,
-    timedMinutes: 0
+    timedMinutes: 0,
+    showAnswerDuringAssessment: true
   },
   totalSeconds: 0,
   currentIndex: 0,
@@ -33,6 +34,7 @@ const questionScreen = el('questionScreen');
 const assessmentSelect = el('assessmentSelect');
 const assessmentInfo = el('assessmentInfo');
 const shuffleOptionsToggle = el('shuffleOptionsToggle');
+const showAnswerToggle = el('showAnswerToggle');
 const timedMinutesInput = el('timedMinutesInput');
 
 const qIndex = el('qIndex');
@@ -131,6 +133,7 @@ function saveSessionState() {
     assessmentId: state.assessmentId,
     shuffleOptions: state.settings.shuffleOptions,
     timedMinutes: state.settings.timedMinutes,
+    showAnswerDuringAssessment: state.settings.showAnswerDuringAssessment,
     sessionQuestions: state.questions,
     totalSeconds: state.totalSeconds,
     currentIndex: state.currentIndex,
@@ -202,12 +205,16 @@ function restoreSessionState() {
 
   state.started = true;
   state.settings.shuffleOptions = parsed.shuffleOptions === true;
+  state.settings.showAnswerDuringAssessment = parsed.showAnswerDuringAssessment !== false;
   const restoredTimedMinutes = Number(parsed.timedMinutes);
   state.settings.timedMinutes = Number.isFinite(restoredTimedMinutes) && restoredTimedMinutes > 0
     ? Math.floor(restoredTimedMinutes)
     : 0;
   if (shuffleOptionsToggle) {
     shuffleOptionsToggle.checked = state.settings.shuffleOptions;
+  }
+  if (showAnswerToggle) {
+    showAnswerToggle.checked = state.settings.showAnswerDuringAssessment;
   }
   if (timedMinutesInput) {
     timedMinutesInput.value = state.settings.timedMinutes > 0 ? String(state.settings.timedMinutes) : '';
@@ -402,6 +409,11 @@ function getDisplayLabelForKey(q, key) {
   return optionLabelByIndex(idx);
 }
 
+function updateShowAnswerAvailability() {
+  const enabled = state.settings.showAnswerDuringAssessment === true;
+  showAnswerBtn.style.display = enabled ? '' : 'none';
+}
+
 function updateStats() {
   const { ans, cor, wro, rev } = calcCounts(state.questions, state);
   answeredCount.textContent = ans;
@@ -493,6 +505,7 @@ function setMainMode(started) {
     resumeBtn.style.display = 'none';
     restartBtn.style.display = 'none';
     backToAssessmentsBtn.style.display = 'none';
+    showAnswerBtn.style.display = '';
     return;
   }
 
@@ -503,6 +516,7 @@ function setMainMode(started) {
   resumeBtn.style.display = '';
   restartBtn.style.display = '';
   backToAssessmentsBtn.style.display = '';
+  updateShowAnswerAvailability();
 }
 
 function renderNavGrid() {
@@ -590,6 +604,7 @@ function renderQuestion() {
   updateEndButtonLabel();
   updateTimersUI();
   updateNavGridStyles();
+  updateShowAnswerAvailability();
   saveSessionState();
 }
 
@@ -646,6 +661,11 @@ function showFeedbackAfterReveal() {
 }
 
 function revealAnswer() {
+  if (!state.settings.showAnswerDuringAssessment) {
+    showFeedback('warn', 'Show Answer disabled', 'Answers will be available after ending the assessment.');
+    return;
+  }
+
   const i = state.currentIndex;
 
   if (state.revealed[i] === true) {
@@ -713,7 +733,11 @@ function startSession() {
   }
 
   state.settings.shuffleOptions = shuffleOptionsToggle.checked;
+  state.settings.showAnswerDuringAssessment = showAnswerToggle ? showAnswerToggle.checked : true;
   state.settings.timedMinutes = timedMinutes;
+  if (showAnswerToggle) {
+    showAnswerToggle.checked = state.settings.showAnswerDuringAssessment;
+  }
   if (timedMinutesInput) {
     timedMinutesInput.value = timedMinutes > 0 ? String(timedMinutes) : '';
   }
@@ -750,6 +774,7 @@ function backToAssessmentSelection() {
 
   state.started = false;
   state.settings.timedMinutes = 0;
+  state.settings.showAnswerDuringAssessment = true;
   state.totalSeconds = 0;
   state.currentIndex = 0;
   state.questions = getCurrentAssessment()?.questions || [];
@@ -766,6 +791,10 @@ function backToAssessmentSelection() {
   updateTimersUI();
   updateEndButtonLabel();
   hideFeedback();
+  if (showAnswerToggle) {
+    showAnswerToggle.checked = true;
+  }
+  updateShowAnswerAvailability();
   updateAssessmentInfo();
   renderNavGrid();
 }
@@ -982,7 +1011,7 @@ document.addEventListener('keydown', (e) => {
 
   if (e.key === 'ArrowRight') { e.preventDefault(); next(); }
   if (e.key === 'ArrowLeft') { e.preventDefault(); prev(); }
-  if (e.key.toLowerCase() === 's') { e.preventDefault(); revealAnswer(); }
+  if (e.key.toLowerCase() === 's' && state.settings.showAnswerDuringAssessment) { e.preventDefault(); revealAnswer(); }
   if (e.key.toLowerCase() === 'r') { e.preventDefault(); toggleReview(); }
   if (e.key.toLowerCase() === 'c') { e.preventDefault(); clearSelection(); }
   if (e.key.toLowerCase() === 'g') { e.preventDefault(); openSummary(); }
@@ -1030,6 +1059,9 @@ wrongReviewModal.addEventListener('click', (e) => {
     populateAssessmentSelect();
     if (shuffleOptionsToggle) {
       shuffleOptionsToggle.checked = false;
+    }
+    if (showAnswerToggle) {
+      showAnswerToggle.checked = true;
     }
     const restored = restoreSessionState();
 

@@ -59,6 +59,12 @@
                 </label>
               </div>
               <div class="settingsRow">
+                <label class="checkboxLabel" for="showAnswerToggle">
+                  <input type="checkbox" id="showAnswerToggle" checked />
+                  <span>Enable Show Answer during assessment</span>
+                </label>
+              </div>
+              <div class="settingsRow">
                 <label class="inputLabel" for="timedMinutesInput">Timed assessment (minutes)</label>
                 <input
                   id="timedMinutesInput"
@@ -76,7 +82,7 @@
             </div>
             <p class="small">
               Tip: On mobile, swipe is not required - use the buttons.
-              On desktop, use <span class="kbd">Left</span>/<span class="kbd">Right</span> to move, <span class="kbd">S</span> to show answer, <span class="kbd">R</span> to mark review.
+              On desktop, use <span class="kbd">Left</span>/<span class="kbd">Right</span> to move, <span class="kbd">S</span> to show answer (if enabled), <span class="kbd">R</span> to mark review.
             </p>
           </div>
 
@@ -309,7 +315,7 @@
           <ul>
             <li><span class="kbd">Right</span> Next</li>
             <li><span class="kbd">Left</span> Prev</li>
-            <li><span class="kbd">S</span> Show Answer</li>
+            <li><span class="kbd">S</span> Show Answer (if enabled)</li>
             <li><span class="kbd">R</span> Toggle Review</li>
             <li><span class="kbd">C</span> Clear Selection</li>
             <li><span class="kbd">G</span> Open Summary</li>
