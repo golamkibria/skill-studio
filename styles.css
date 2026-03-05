@@ -210,6 +210,13 @@
       color: var(--text);
       font-weight: 600;
     }
+    select.settingInput{
+      color-scheme: dark;
+    }
+    select.settingInput option{
+      background: #0f1a33;
+      color: var(--text);
+    }
     .settingInput:focus{
       outline: 2px solid rgba(99,102,241,.55);
       outline-offset: 1px;
@@ -474,6 +481,21 @@
       z-index: 50;
     }
     .modal.show{ display:flex; }
+    .modal.drawer{
+      justify-content: flex-end;
+      padding: 0;
+    }
+    .modal.drawer .box{
+      width: min(420px, 100%);
+      height: 100%;
+      max-height: 100%;
+      border-radius: 18px 0 0 18px;
+      display: flex;
+      flex-direction: column;
+    }
+    .modal.drawer .box .bd{
+      overflow: auto;
+    }
     .modal .box{
       background: #0f1a33; /* solid, readable */
       border: 1px solid rgba(255,255,255,.14);
@@ -555,4 +577,46 @@
     .wrongItem button{
       padding: 8px 10px;
       border-radius: 10px;
+    }
+    .filterModeBtn.active{
+      border-color: rgba(99,102,241,.55);
+      background: rgba(99,102,241,.18);
+    }
+    .filterResults{
+      margin-top: 10px;
+      display: grid;
+      gap: 8px;
+    }
+    .filterItem{
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: 12px;
+      background: rgba(255,255,255,.04);
+      padding: 10px;
+      cursor: pointer;
+    }
+    .filterItem:hover{
+      border-color: rgba(129,140,248,.50);
+      background: rgba(129,140,248,.10);
+    }
+    .filterItem .top{
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      align-items: center;
+      margin-bottom: 4px;
+    }
+    .filterItem .q{
+      font-weight: 750;
+      font-size: 13px;
+      color: var(--text);
+    }
+    .filterItem .meta{
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .filterItem .preview{
+      margin-top: 6px;
+      font-size: 13px;
+      color: var(--text);
+      line-height: 1.35;
     }

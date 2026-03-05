@@ -15,6 +15,7 @@ GitHub Pages: https://golamkibria.github.io/skill-studio/
 - Pause/Resume support (button + `P` shortcut), including persisted paused state on refresh
 - Instant answer checking with `Show Answer` (when enabled)
 - Mark-for-review and jump-to-review navigation
+- Question filter drawer: `Unanswered`, `Marked`, `Wrong`, `Topic`
 - Question grid navigation (jump to any question)
 - Session timers (total elapsed and per-question)
 - Summary modal with answered/correct/wrong/review counts
@@ -120,6 +121,7 @@ window.assessments = assessments;
 - `C` - Clear selection
 - `G` - Open summary
 - `P` - Pause/Resume assessment
+- `F` - Open question filters
 
 ## Behavior Details
 

@@ -155,6 +155,7 @@
           </div>
           <div class="miniBtns">
             <button class="ghost" id="toggleGridBtn">Toggle Grid</button>
+            <button class="ghost" id="openFilterDrawerBtn">Filters</button>
             <button class="ghost" id="openSummaryBtn">Summary</button>
           </div>
         </div>
@@ -301,6 +302,32 @@
   </div>
 </div>
 
+  <div class="modal drawer" id="filterDrawerModal" aria-hidden="true">
+    <div class="box" role="dialog" aria-modal="true" aria-labelledby="filterDrawerTitle">
+      <div class="hd">
+        <h3 id="filterDrawerTitle">Question Filters</h3>
+        <button class="ghost" id="closeFilterDrawerBtn">Close</button>
+      </div>
+      <div class="bd">
+        <div class="btnrow" id="filterModeRow">
+          <button class="secondary filterModeBtn" id="filterUnansweredBtn">Unanswered</button>
+          <button class="secondary filterModeBtn" id="filterMarkedBtn">Marked</button>
+          <button class="secondary filterModeBtn" id="filterWrongBtn">Wrong</button>
+          <button class="secondary filterModeBtn" id="filterTopicBtn">Topic</button>
+        </div>
+
+        <div class="settingsRow" id="filterTopicRow" style="display:none; margin-top:10px;">
+          <label class="inputLabel" for="filterTopicSelect">Select Topic</label>
+          <select id="filterTopicSelect" class="settingInput"></select>
+        </div>
+
+        <div class="small" id="filterHint" style="margin-top:8px; display:none;"></div>
+        <div class="small" id="filterSummary" style="margin-top:10px;"></div>
+        <div class="filterResults" id="filterResults"></div>
+      </div>
+    </div>
+  </div>
+
   <!-- Help Modal -->
   <div class="modal" id="helpModal" aria-hidden="true">
     <div class="box" role="dialog" aria-modal="true" aria-labelledby="helpTitle">
@@ -326,6 +353,7 @@
             <li><span class="kbd">C</span> Clear Selection</li>
             <li><span class="kbd">G</span> Open Summary</li>
             <li><span class="kbd">P</span> Pause/Resume</li>
+            <li><span class="kbd">F</span> Open Filters</li>
           </ul>
         </div>
         <div class="note">

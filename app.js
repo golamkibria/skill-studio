@@ -76,6 +76,7 @@ const timeLeft = el('timeLeft');
 
 const toggleGridBtn = el('toggleGridBtn');
 const gridWrap = el('gridWrap');
+const openFilterDrawerBtn = el('openFilterDrawerBtn');
 const openSummaryBtn = el('openSummaryBtn');
 
 const summaryModal = el('summaryModal');
@@ -113,9 +114,26 @@ const prevWrongBtn = el('prevWrongBtn');
 const nextWrongBtn = el('nextWrongBtn');
 const gotoWrongBtn = el('gotoWrongBtn');
 
+const filterDrawerModal = el('filterDrawerModal');
+const closeFilterDrawerBtn = el('closeFilterDrawerBtn');
+const filterUnansweredBtn = el('filterUnansweredBtn');
+const filterMarkedBtn = el('filterMarkedBtn');
+const filterWrongBtn = el('filterWrongBtn');
+const filterTopicBtn = el('filterTopicBtn');
+const filterTopicRow = el('filterTopicRow');
+const filterTopicSelect = el('filterTopicSelect');
+const filterHint = el('filterHint');
+const filterSummary = el('filterSummary');
+const filterResults = el('filterResults');
+
 const wrongReviewState = {
   wrongIndexes: [],
   pos: 0
+};
+
+const filterDrawerState = {
+  mode: 'unanswered',
+  topic: 'all'
 };
 
 function clearSavedSession() {
@@ -452,6 +470,7 @@ function updatePauseUI() {
   jumpLastBtn.disabled = paused;
   jumpUnansweredBtn.disabled = paused;
   jumpReviewBtn.disabled = paused;
+  openFilterDrawerBtn.disabled = paused;
 }
 
 function setPaused(paused) {
@@ -998,6 +1017,137 @@ function closeHelpModal() {
   helpModal.setAttribute('aria-hidden', 'true');
 }
 
+function getFilteredIndexes() {
+  const indexes = [];
+  for (let i = 0; i < state.questions.length; i++) {
+    const q = state.questions[i];
+    const isUnanswered = !state.selected[i];
+    const isMarked = state.markedReview[i] === true;
+    const isWrong = state.selected[i] && state.isCorrect[i] === false;
+    const topic = q.topic || 'General';
+
+    if (filterDrawerState.mode === 'unanswered' && isUnanswered) indexes.push(i);
+    if (filterDrawerState.mode === 'marked' && isMarked) indexes.push(i);
+    if (filterDrawerState.mode === 'wrong' && isWrong) indexes.push(i);
+    if (filterDrawerState.mode === 'topic' && (filterDrawerState.topic === 'all' || filterDrawerState.topic === topic)) {
+      indexes.push(i);
+    }
+  }
+  return indexes;
+}
+
+function refreshFilterTopics() {
+  const topics = [...new Set(state.questions.map((q) => q.topic || 'General'))].sort((a, b) => a.localeCompare(b));
+  filterTopicSelect.innerHTML = '';
+
+  const allOpt = document.createElement('option');
+  allOpt.value = 'all';
+  allOpt.textContent = 'All Topics';
+  filterTopicSelect.appendChild(allOpt);
+
+  topics.forEach((topic) => {
+    const opt = document.createElement('option');
+    opt.value = topic;
+    opt.textContent = topic;
+    filterTopicSelect.appendChild(opt);
+  });
+
+  if (!topics.includes(filterDrawerState.topic)) {
+    filterDrawerState.topic = 'all';
+  }
+  filterTopicSelect.value = filterDrawerState.topic;
+}
+
+function setFilterMode(mode) {
+  filterDrawerState.mode = mode;
+  filterUnansweredBtn.classList.toggle('active', mode === 'unanswered');
+  filterMarkedBtn.classList.toggle('active', mode === 'marked');
+  filterWrongBtn.classList.toggle('active', mode === 'wrong');
+  filterTopicBtn.classList.toggle('active', mode === 'topic');
+  filterTopicRow.style.display = mode === 'topic' ? '' : 'none';
+  if (mode === 'wrong') {
+    filterHint.style.display = '';
+    filterHint.textContent = 'Wrong questions appear after Show Answer, or after final evaluation when assessment ends.';
+  } else {
+    filterHint.style.display = 'none';
+    filterHint.textContent = '';
+  }
+  renderFilterResults();
+}
+
+function updateFilterControlsVisibility() {
+  const hasEvaluatedAnswers = state.revealed.some((x) => x === true);
+  const showWrongFilter = state.settings.showAnswerDuringAssessment || hasEvaluatedAnswers;
+  filterWrongBtn.style.display = showWrongFilter ? '' : 'none';
+
+  if (!showWrongFilter && filterDrawerState.mode === 'wrong') {
+    filterDrawerState.mode = 'unanswered';
+  }
+}
+
+function renderFilterResults() {
+  const indexes = getFilteredIndexes();
+  const labelMap = {
+    unanswered: 'Unanswered',
+    marked: 'Marked',
+    wrong: 'Wrong',
+    topic: 'Topic'
+  };
+  const modeLabel = labelMap[filterDrawerState.mode] || 'Filter';
+  filterSummary.textContent = `${modeLabel}: ${indexes.length} question(s)`;
+
+  filterResults.innerHTML = '';
+  if (!indexes.length) {
+    const empty = document.createElement('div');
+    empty.className = 'small';
+    empty.textContent = 'No questions match this filter.';
+    filterResults.appendChild(empty);
+    return;
+  }
+
+  indexes.forEach((idx) => {
+    const q = state.questions[idx];
+    const item = document.createElement('div');
+    item.className = 'filterItem';
+    const status = statusText(state.selected[idx], state.revealed[idx], state.isCorrect[idx]);
+    const topic = q.topic || 'General';
+    const questionPreview = q.text.length > 110 ? `${q.text.slice(0, 107)}...` : q.text;
+
+    item.innerHTML = `
+      <div class="top">
+        <div class="q">Q${idx + 1}</div>
+        <div class="meta">${escapeHtml(topic)}</div>
+      </div>
+      <div class="meta">${escapeHtml(status)}</div>
+      <div class="preview">${escapeHtml(questionPreview)}</div>
+    `;
+
+    item.addEventListener('click', () => {
+      if (state.isPaused) {
+        showFeedback('warn', 'Assessment paused', 'Resume the assessment to navigate.');
+        return;
+      }
+      closeFilterDrawer();
+      goTo(idx);
+    });
+    filterResults.appendChild(item);
+  });
+}
+
+function openFilterDrawer() {
+  if (!state.started) return;
+  updateFilterControlsVisibility();
+  refreshFilterTopics();
+  setFilterMode(filterDrawerState.mode);
+  filterDrawerModal.classList.add('show');
+  filterDrawerModal.setAttribute('aria-hidden', 'false');
+}
+
+function closeFilterDrawer() {
+  filterDrawerModal.classList.remove('show');
+  filterDrawerModal.setAttribute('aria-hidden', 'true');
+}
+
 function jumpNextUnanswered() {
   if (state.isPaused) return;
   for (let i = state.currentIndex + 1; i < state.questions.length; i++) {
@@ -1070,6 +1220,17 @@ toggleGridBtn.addEventListener('click', () => {
   gridWrap.style.display = (gridWrap.style.display === 'none') ? '' : 'none';
 });
 
+openFilterDrawerBtn.addEventListener('click', openFilterDrawer);
+closeFilterDrawerBtn.addEventListener('click', closeFilterDrawer);
+filterUnansweredBtn.addEventListener('click', () => setFilterMode('unanswered'));
+filterMarkedBtn.addEventListener('click', () => setFilterMode('marked'));
+filterWrongBtn.addEventListener('click', () => setFilterMode('wrong'));
+filterTopicBtn.addEventListener('click', () => setFilterMode('topic'));
+filterTopicSelect.addEventListener('change', (e) => {
+  filterDrawerState.topic = e.target.value;
+  renderFilterResults();
+});
+
 openSummaryBtn.addEventListener('click', openSummary);
 closeSummaryBtn.addEventListener('click', closeSummary);
 continueBtn.addEventListener('click', () => {
@@ -1091,16 +1252,26 @@ helpModal.addEventListener('click', (e) => {
   if (e.target === helpModal) closeHelpModal();
 });
 
+filterDrawerModal.addEventListener('click', (e) => {
+  if (e.target === filterDrawerModal) closeFilterDrawer();
+});
+
 jumpUnansweredBtn.addEventListener('click', jumpNextUnanswered);
 jumpReviewBtn.addEventListener('click', jumpNextReview);
 
 document.addEventListener('keydown', (e) => {
   if (!state.started) return;
-  if (summaryModal.classList.contains('show') || helpModal.classList.contains('show')) return;
+  if (e.key === 'Escape' && filterDrawerModal.classList.contains('show')) {
+    e.preventDefault();
+    closeFilterDrawer();
+    return;
+  }
+  if (summaryModal.classList.contains('show') || helpModal.classList.contains('show') || wrongReviewModal.classList.contains('show') || filterDrawerModal.classList.contains('show')) return;
 
   if (e.key.toLowerCase() === 'p') { e.preventDefault(); setPaused(!state.isPaused); return; }
   if (state.isPaused) return;
 
+  if (e.key.toLowerCase() === 'f') { e.preventDefault(); openFilterDrawer(); return; }
   if (e.key === 'ArrowRight') { e.preventDefault(); next(); }
   if (e.key === 'ArrowLeft') { e.preventDefault(); prev(); }
   if (e.key.toLowerCase() === 's' && state.settings.showAnswerDuringAssessment) { e.preventDefault(); revealAnswer(); }
