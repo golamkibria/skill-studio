@@ -12,7 +12,9 @@ GitHub Pages: https://golamkibria.github.io/skill-studio/
 - One-question-at-a-time assessment flow
 - Optional per-assessment setting to shuffle question options
 - Optional timed assessment setting (minutes) with auto-end on timeout
+- Explicit `Use time limit` toggle for quick untimed practice mode
 - Optional setting to disable `Show Answer` during assessment (results shown at end)
+- Pause/Resume support (including persisted paused state on refresh)
 - Instant answer checking with `Show Answer`
 - Mark-for-review and jump-to-review navigation
 - Question grid navigation (jump to any question)
@@ -97,6 +99,7 @@ window.assessments = assessments;
 - `R` - Toggle review mark
 - `C` - Clear selection
 - `G` - Open summary
+- `P` - Pause/Resume assessment
 
 ## Behavior Details
 

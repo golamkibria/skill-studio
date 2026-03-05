@@ -35,7 +35,6 @@
           </div>
           <div class="btnrow">
             <button id="startBtn">Start</button>
-            <button class="secondary" id="resumeBtn" style="display:none;">Resume</button>
             <button class="secondary" id="restartBtn" style="display:none;">Restart</button>
             <button class="ghost" id="backToAssessmentsBtn" style="display:none;">Back to Assessments</button>
           </div>
@@ -53,19 +52,19 @@
               <select id="assessmentSelect"></select>
               <div class="small" id="assessmentInfo"></div>
               <div class="settingsRow">
-                <label class="checkboxLabel" for="shuffleOptionsToggle">
-                  <input type="checkbox" id="shuffleOptionsToggle" />
-                  <span>Shuffle options</span>
-                </label>
-              </div>
-              <div class="settingsRow">
                 <label class="checkboxLabel" for="showAnswerToggle">
                   <input type="checkbox" id="showAnswerToggle" checked />
                   <span>Enable Show Answer during assessment</span>
                 </label>
               </div>
               <div class="settingsRow">
-                <label class="inputLabel" for="timedMinutesInput">Timed assessment (minutes)</label>
+                <label class="checkboxLabel" for="useTimedToggle">
+                  <input type="checkbox" id="useTimedToggle" />
+                  <span>Use time limit</span>
+                </label>
+              </div>
+              <div class="settingsRow" id="timedMinutesRow" style="display:none;">
+                <label class="inputLabel" for="timedMinutesInput">Time limit (minutes)</label>
                 <input
                   id="timedMinutesInput"
                   class="settingInput"
@@ -75,6 +74,12 @@
                   inputmode="numeric"
                   placeholder="Leave blank for untimed"
                 />
+              </div>
+              <div class="settingsRow">
+                <label class="checkboxLabel" for="shuffleOptionsToggle">
+                  <input type="checkbox" id="shuffleOptionsToggle" />
+                  <span>Shuffle answer choices</span>
+                </label>
               </div>
             </div>
             <div class="btnrow">
@@ -131,6 +136,7 @@
                 </button>
               </div>
               <div class="btnrow">
+                <button id="pauseBtn" class="secondary">Pause</button>
                 <button id="endBtn" class="bad">End Assessment</button>
               </div>
             </div>
@@ -319,6 +325,7 @@
             <li><span class="kbd">R</span> Toggle Review</li>
             <li><span class="kbd">C</span> Clear Selection</li>
             <li><span class="kbd">G</span> Open Summary</li>
+            <li><span class="kbd">P</span> Pause/Resume</li>
           </ul>
         </div>
         <div class="note">
