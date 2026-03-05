@@ -20,6 +20,7 @@
       <div class="topbar">
         <div class="pill">Total Time: <strong id="totalTime">00:00</strong></div>
         <div class="pill">Question Time: <strong id="qTime">00:00</strong></div>
+        <div class="pill" id="timeLeftPill" style="display:none;">Time Left: <strong id="timeLeft">00:00</strong></div>
         <button class="ghost" id="openHelp">Help</button>
       </div>
     </header>
@@ -56,6 +57,18 @@
                   <input type="checkbox" id="shuffleOptionsToggle" />
                   <span>Shuffle options</span>
                 </label>
+              </div>
+              <div class="settingsRow">
+                <label class="inputLabel" for="timedMinutesInput">Timed assessment (minutes)</label>
+                <input
+                  id="timedMinutesInput"
+                  class="settingInput"
+                  type="number"
+                  min="1"
+                  step="1"
+                  inputmode="numeric"
+                  placeholder="Leave blank for untimed"
+                />
               </div>
             </div>
             <div class="btnrow">
@@ -231,6 +244,7 @@
             <li>During assessment, Correct/Wrong counts after <strong>Show Answer</strong>. 
                 When you click End Assessment, the final report evaluates all answers you selected.  
             </li>
+            <li>If timed mode is set, assessment auto-ends when time reaches zero.</li>
             <li>Progress auto-saves in this browser during an active assessment.</li>
           </ul>
         </div>

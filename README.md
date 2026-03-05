@@ -11,6 +11,7 @@ GitHub Pages: https://golamkibria.github.io/skill-studio/
 - Multiple assessment support via `window.assessments`
 - One-question-at-a-time assessment flow
 - Optional per-assessment setting to shuffle question options
+- Optional timed assessment setting (minutes) with auto-end on timeout
 - Instant answer checking with `Show Answer`
 - Mark-for-review and jump-to-review navigation
 - Question grid navigation (jump to any question)
@@ -49,6 +50,7 @@ const assessments = [
     name: "ICT Core Assessment",
     description: "Core ICT assessment...",
     tags: ["ict", "core", "mixed"],
+    timedMinutes: 90,
     questions: [
       {
         id: 1,
@@ -74,6 +76,7 @@ window.assessments = assessments;
 
 - `options` can be an object (`{ A: "...", B: "..." }`) or an array (`[{ key, text }]`).
 - `answer` must match one of the option keys.
+- `timedMinutes` is optional; if set, it pre-fills the timed assessment input.
 - App validates assessment/question structure at startup.
 
 ## Usage Flow

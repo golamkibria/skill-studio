@@ -195,6 +195,25 @@
     .settingsRow{
       margin-top: 2px;
     }
+    .inputLabel{
+      display:block;
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+    .settingInput{
+      width: 100%;
+      border-radius: 10px;
+      padding: 9px 10px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.16);
+      color: var(--text);
+      font-weight: 600;
+    }
+    .settingInput:focus{
+      outline: 2px solid rgba(99,102,241,.55);
+      outline-offset: 1px;
+    }
     .checkboxLabel{
       display:inline-flex;
       align-items:center;

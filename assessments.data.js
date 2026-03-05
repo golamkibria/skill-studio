@@ -170,6 +170,7 @@ const assessments = [
     name: 'ICT Core Assessment',
     description: 'Core ICT assessment covering hardware, software, networking, and concepts.',
     tags: ['ict', 'core', 'mixed'],
+    timedMinutes: 90,
     questions: defaultQuestions
   }
 ];
@@ -1356,6 +1357,7 @@ assessments.push(
     name: 'ICT OLYMPIAD – FINAL MOCK TEST (Practice Version)',
     description: '60-question final mock exam (practice version) with answers and mixed difficulty.',
     tags: ['ict', 'olympiad', 'mock', 'practice'],
+    timedMinutes: 60,
     questions: finalMockQuestions
   },
   {
@@ -1363,6 +1365,7 @@ assessments.push(
     name: 'ULTRA-HARD ICT OLYMPIAD CHALLENGE SET (Practice Version)',
     description: '30-question ultra-hard challenge set (practice version) with multi-concept and logic-driven items.',
     tags: ['ict', 'olympiad', 'ultra-hard', 'challenge', 'practice'],
+    timedMinutes: 45,
     questions: ultraHardQuestions
   }
 );

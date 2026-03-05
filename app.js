@@ -6,7 +6,8 @@ const state = {
   assessmentId: null,
   questions: [],
   settings: {
-    shuffleOptions: false
+    shuffleOptions: false,
+    timedMinutes: 0
   },
   totalSeconds: 0,
   currentIndex: 0,
@@ -32,6 +33,7 @@ const questionScreen = el('questionScreen');
 const assessmentSelect = el('assessmentSelect');
 const assessmentInfo = el('assessmentInfo');
 const shuffleOptionsToggle = el('shuffleOptionsToggle');
+const timedMinutesInput = el('timedMinutesInput');
 
 const qIndex = el('qIndex');
 const qTotal = el('qTotal');
@@ -63,6 +65,8 @@ const reviewCount = el('reviewCount');
 
 const totalTime = el('totalTime');
 const qTime = el('qTime');
+const timeLeftPill = el('timeLeftPill');
+const timeLeft = el('timeLeft');
 
 const toggleGridBtn = el('toggleGridBtn');
 const gridWrap = el('gridWrap');
@@ -126,6 +130,7 @@ function saveSessionState() {
     started: state.started,
     assessmentId: state.assessmentId,
     shuffleOptions: state.settings.shuffleOptions,
+    timedMinutes: state.settings.timedMinutes,
     sessionQuestions: state.questions,
     totalSeconds: state.totalSeconds,
     currentIndex: state.currentIndex,
@@ -197,7 +202,16 @@ function restoreSessionState() {
 
   state.started = true;
   state.settings.shuffleOptions = parsed.shuffleOptions === true;
-  shuffleOptionsToggle.checked = state.settings.shuffleOptions;
+  const restoredTimedMinutes = Number(parsed.timedMinutes);
+  state.settings.timedMinutes = Number.isFinite(restoredTimedMinutes) && restoredTimedMinutes > 0
+    ? Math.floor(restoredTimedMinutes)
+    : 0;
+  if (shuffleOptionsToggle) {
+    shuffleOptionsToggle.checked = state.settings.shuffleOptions;
+  }
+  if (timedMinutesInput) {
+    timedMinutesInput.value = state.settings.timedMinutes > 0 ? String(state.settings.timedMinutes) : '';
+  }
   state.questions = parsed.sessionQuestions.map((q) => ({
     ...q,
     options: normalizeOptions(q.options).map((opt) => ({ key: opt.key, text: opt.text }))
@@ -252,6 +266,34 @@ function buildSessionQuestions(sourceQuestions, shuffleOptionsEnabled) {
   });
 }
 
+function getTimedLimitSeconds() {
+  return state.settings.timedMinutes > 0 ? state.settings.timedMinutes * 60 : 0;
+}
+
+function getRemainingSeconds() {
+  const limit = getTimedLimitSeconds();
+  if (limit <= 0) return null;
+  return Math.max(0, limit - state.totalSeconds);
+}
+
+function isTimedExpired() {
+  const limit = getTimedLimitSeconds();
+  return limit > 0 && state.totalSeconds >= limit;
+}
+
+function readTimedMinutesInput() {
+  if (!timedMinutesInput) return 0;
+  const raw = timedMinutesInput.value.trim();
+  if (!raw) return 0;
+
+  const parsed = Number(raw);
+  if (!Number.isFinite(parsed) || parsed <= 0) {
+    return null;
+  }
+
+  return Math.floor(parsed);
+}
+
 function validateQuestions(items) {
   if (!Array.isArray(items) || items.length === 0) {
     throw new Error('Questions dataset is empty or invalid.');
@@ -303,7 +345,14 @@ function updateAssessmentInfo() {
   }
 
   const tags = Array.isArray(current.tags) && current.tags.length ? current.tags.join(', ') : 'none';
-  assessmentInfo.textContent = `${current.description || 'No description'} | ${current.questions.length} questions | Tags: ${tags}`;
+  const defaultTimedMinutes = Number.isFinite(current.timedMinutes) && current.timedMinutes > 0
+    ? Math.floor(current.timedMinutes)
+    : 0;
+  assessmentInfo.textContent = `${current.description || 'No description'} | ${current.questions.length} questions | Tags: ${tags} | Default timer: ${defaultTimedMinutes > 0 ? `${defaultTimedMinutes} min` : 'Off'}`;
+
+  if (!state.started && timedMinutesInput) {
+    timedMinutesInput.value = defaultTimedMinutes > 0 ? String(defaultTimedMinutes) : '';
+  }
 }
 
 function selectAssessment(assessmentId) {
@@ -376,6 +425,16 @@ function updateTimersUI() {
   const idx = state.currentIndex;
   const qSecs = state.perQuestionSeconds[idx] || 0;
   qTime.textContent = fmtTime(qSecs);
+
+  const remaining = getRemainingSeconds();
+  if (remaining === null) {
+    timeLeftPill.style.display = 'none';
+    timeLeft.textContent = '00:00';
+    return;
+  }
+
+  timeLeftPill.style.display = '';
+  timeLeft.textContent = fmtTime(remaining);
 }
 
 function stopTimers() {
@@ -385,12 +444,34 @@ function stopTimers() {
   state.timers.perQ = null;
 }
 
+function endSessionDueToTime() {
+  if (!isTimedExpired()) return;
+
+  stopTimers();
+  state.totalSeconds = getTimedLimitSeconds();
+  finalizeEvaluation(state.questions, state);
+  openSummary();
+  saveSessionState();
+  alert('Time is up. Assessment ended and the report is now available.');
+}
+
 function startTimers() {
   stopTimers();
 
+  if (isTimedExpired()) {
+    endSessionDueToTime();
+    return;
+  }
+
   state.timers.total = setInterval(() => {
     state.totalSeconds++;
-    totalTime.textContent = fmtTime(state.totalSeconds);
+
+    if (isTimedExpired()) {
+      endSessionDueToTime();
+      return;
+    }
+
+    updateTimersUI();
     if (state.totalSeconds % 10 === 0) {
       saveSessionState();
     }
@@ -399,7 +480,7 @@ function startTimers() {
   state.timers.perQ = setInterval(() => {
     const idx = state.currentIndex;
     state.perQuestionSeconds[idx] = (state.perQuestionSeconds[idx] || 0) + 1;
-    qTime.textContent = fmtTime(state.perQuestionSeconds[idx]);
+    updateTimersUI();
   }, 1000);
 }
 
@@ -625,7 +706,17 @@ function startSession() {
   }
 
   stopTimers();
+  const timedMinutes = readTimedMinutesInput();
+  if (timedMinutes === null) {
+    alert('Please enter a valid timed assessment duration in minutes (positive whole number), or leave it blank.');
+    return;
+  }
+
   state.settings.shuffleOptions = shuffleOptionsToggle.checked;
+  state.settings.timedMinutes = timedMinutes;
+  if (timedMinutesInput) {
+    timedMinutesInput.value = timedMinutes > 0 ? String(timedMinutes) : '';
+  }
   state.questions = buildSessionQuestions(current.questions, state.settings.shuffleOptions);
   state.started = true;
   state.totalSeconds = 0;
@@ -658,6 +749,7 @@ function backToAssessmentSelection() {
   clearSavedSession();
 
   state.started = false;
+  state.settings.timedMinutes = 0;
   state.totalSeconds = 0;
   state.currentIndex = 0;
   state.questions = getCurrentAssessment()?.questions || [];
@@ -674,6 +766,7 @@ function backToAssessmentSelection() {
   updateTimersUI();
   updateEndButtonLabel();
   hideFeedback();
+  updateAssessmentInfo();
   renderNavGrid();
 }
 
@@ -711,12 +804,16 @@ function openSummary() {
   const wrongIdxs = buildWrongIndexes(state.questions, state);
   wrongCountSummary.textContent = String(wrongIdxs.length);
   reviewWrongBtn.disabled = wrongIdxs.length === 0;
+  const timedExpired = isTimedExpired();
+  continueBtn.disabled = timedExpired;
+  continueBtn.textContent = timedExpired ? 'Time Expired' : 'Resume Assessment';
 
   summaryModal.classList.add('show');
   summaryModal.setAttribute('aria-hidden', 'false');
 }
 
-function closeSummary() {
+function closeSummary(force = false) {
+  if (!force && isTimedExpired()) return;
   summaryModal.classList.remove('show');
   summaryModal.setAttribute('aria-hidden', 'true');
 }
@@ -830,7 +927,7 @@ resumeBtn.addEventListener('click', () => {
 
 restartBtn.addEventListener('click', startSession);
 restartBtn2.addEventListener('click', () => {
-  closeSummary();
+  closeSummary(true);
   startSession();
 });
 backToAssessmentsBtn.addEventListener('click', backToAssessmentSelection);
@@ -860,6 +957,7 @@ toggleGridBtn.addEventListener('click', () => {
 openSummaryBtn.addEventListener('click', openSummary);
 closeSummaryBtn.addEventListener('click', closeSummary);
 continueBtn.addEventListener('click', () => {
+  if (isTimedExpired()) return;
   closeSummary();
   startTimers();
 });
