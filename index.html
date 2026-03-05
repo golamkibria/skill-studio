@@ -4,7 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Skill Studio</title>
-    <link rel="stylesheet" href="./styles.css" />
+  <meta name="theme-color" content="#1d2b54" />
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+  <link rel="manifest" href="./site.webmanifest" />
+  <link rel="apple-touch-icon" href="./icons/icon.svg" />
+  <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
   <div class="wrap">
@@ -58,15 +62,17 @@
 
           <!-- Question screen -->
           <div id="questionScreen" style="display:none;">
-            <div class="qmeta">
-              <div class="chip">Q# <strong id="qIndex">1</strong>/<span id="qTotal">150</span></div>
-              <div class="chip">Status: <strong id="qStatus">Not answered</strong></div>
-              <div class="chip">Review: <strong id="qReview">No</strong></div>
+            <div class="questionFocus">
+              <div class="qmeta">
+                <div class="chip">Q# <strong id="qIndex">1</strong>/<span id="qTotal">150</span></div>
+                <div class="chip">Status: <strong id="qStatus">Not answered</strong></div>
+                <div class="chip">Review: <strong id="qReview">No</strong></div>
+              </div>
+
+              <p class="qtext" id="qText"></p>
+
+              <div class="options" id="options"></div>
             </div>
-
-            <p class="qtext" id="qText"></p>
-
-            <div class="options" id="options"></div>
 
             <div class="btnrow">
               <button id="showAnswerBtn" class="good">Show Answer</button>
@@ -81,13 +87,25 @@
 
             <div class="footerActions">
               <div class="btnrow">
-                <button id="prevBtn" class="secondary">&lt;- Prev</button>
-                <button id="nextBtn" class="secondary">Next -&gt;</button>
-                <button id="jumpFirstBtn" class="ghost">First</button>
-                <button id="jumpLastBtn" class="ghost">Last</button>
+                <button id="prevBtn" class="secondary navIconBtn" aria-label="Previous question" title="Previous question">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 5.5L9 12l6.5 6.5" /></svg>
+                  <span class="srOnly">Previous question</span>
+                </button>
+                <button id="nextBtn" class="secondary navIconBtn" aria-label="Next question" title="Next question">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.5 5.5L15 12l-6.5 6.5" /></svg>
+                  <span class="srOnly">Next question</span>
+                </button>
+                <button id="jumpFirstBtn" class="ghost navIconBtn" aria-label="First question" title="First question">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 5.5L7 12l6.5 6.5M17 5.5L10.5 12 17 18.5" /></svg>
+                  <span class="srOnly">First question</span>
+                </button>
+                <button id="jumpLastBtn" class="ghost navIconBtn" aria-label="Last question" title="Last question">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.5 5.5L17 12l-6.5 6.5M7 5.5L13.5 12 7 18.5" /></svg>
+                  <span class="srOnly">Last question</span>
+                </button>
               </div>
               <div class="btnrow">
-                <button id="endBtn" class="bad">End Practice</button>
+                <button id="endBtn" class="bad">End Assessment</button>
               </div>
             </div>
 
@@ -211,7 +229,7 @@
         </div>
 
         <div class="btnrow">
-          <button id="continueBtn" class="secondary">Continue Practice</button>
+          <button id="continueBtn" class="secondary">Resume Assessment</button>
           <button id="restartBtn2" class="bad">Restart</button>
         </div>
       </div>
@@ -233,8 +251,14 @@
 
       <div class="footerActions" style="margin-top:12px;">
         <div class="btnrow">
-          <button id="prevWrongBtn" class="secondary">&lt;- Prev</button>
-          <button id="nextWrongBtn" class="secondary">Next -&gt;</button>
+          <button id="prevWrongBtn" class="secondary navIconBtn" aria-label="Previous wrong answer" title="Previous wrong answer">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 5.5L9 12l6.5 6.5" /></svg>
+            <span class="srOnly">Previous wrong answer</span>
+          </button>
+          <button id="nextWrongBtn" class="secondary navIconBtn" aria-label="Next wrong answer" title="Next wrong answer">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.5 5.5L15 12l-6.5 6.5" /></svg>
+            <span class="srOnly">Next wrong answer</span>
+          </button>
         </div>
         <div class="btnrow">
           <button id="gotoWrongBtn" class="ghost">Go to Question</button>

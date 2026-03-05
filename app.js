@@ -217,6 +217,16 @@ function updateStats() {
   reviewCount.textContent = rev;
 }
 
+function updateEndButtonLabel() {
+  if (!state.started || !state.questions.length) {
+    endBtn.textContent = 'End Assessment';
+    return;
+  }
+
+  const unanswered = state.selected.filter((x) => !x).length;
+  endBtn.textContent = unanswered > 0 ? 'End Assessment' : 'Finish & View Report';
+}
+
 function updateTimersUI() {
   totalTime.textContent = fmtTime(state.totalSeconds);
   const idx = state.currentIndex;
@@ -347,6 +357,7 @@ function renderQuestion() {
   ].join(' | ');
 
   updateStats();
+  updateEndButtonLabel();
   updateTimersUI();
   updateNavGridStyles();
 }
@@ -670,6 +681,14 @@ document.addEventListener('keydown', (e) => {
   if (e.key.toLowerCase() === 'r') { e.preventDefault(); toggleReview(); }
   if (e.key.toLowerCase() === 'c') { e.preventDefault(); clearSelection(); }
   if (e.key.toLowerCase() === 'g') { e.preventDefault(); openSummary(); }
+});
+
+window.addEventListener('beforeunload', (e) => {
+  if (!state.started) return;
+
+  // Trigger browser-native confirmation to prevent accidental refresh/tab close.
+  e.preventDefault();
+  e.returnValue = '';
 });
 
 reviewWrongBtn.addEventListener('click', () => {
