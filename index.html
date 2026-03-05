@@ -15,7 +15,7 @@
     <header>
       <div class="brand">
         <h1>Skill Studio</h1>
-        <div class="sub">One-page practice exam | Mobile friendly | Auto-resume after refresh</div>
+        <div class="sub">One-page assessment app | Mobile friendly | Auto-resume after refresh</div>
       </div>
       <div class="topbar">
         <div class="pill">Total Time: <strong id="totalTime">00:00</strong></div>
@@ -51,9 +51,15 @@
               <label for="assessmentSelect" class="small">Select Assessment</label>
               <select id="assessmentSelect"></select>
               <div class="small" id="assessmentInfo"></div>
+              <div class="settingsRow">
+                <label class="checkboxLabel" for="shuffleOptionsToggle">
+                  <input type="checkbox" id="shuffleOptionsToggle" />
+                  <span>Shuffle options</span>
+                </label>
+              </div>
             </div>
             <div class="btnrow">
-              <button id="startBtn2" class="good">Start Practice</button>
+              <button id="startBtn2" class="good">Start Assessment</button>
             </div>
             <p class="small">
               Tip: On mobile, swipe is not required - use the buttons.
@@ -222,8 +228,8 @@
         <div class="note">
           Notes:
           <ul>            
-            <li>During practice, Correct/Wrong counts after <strong>Show Answer</strong>. 
-                When you click End Practice, the final report evaluates all answers you selected.  
+            <li>During assessment, Correct/Wrong counts after <strong>Show Answer</strong>. 
+                When you click End Assessment, the final report evaluates all answers you selected.  
             </li>
             <li>Progress auto-saves in this browser during an active assessment.</li>
           </ul>
@@ -279,7 +285,7 @@
       <div class="bd">
         <div class="small">
           <ul>
-            <li><strong>Start</strong> begins a new practice session.</li>
+            <li><strong>Start</strong> begins a new assessment session.</li>
             <li>Select an option, then press <strong>Show Answer</strong> to get instant correctness feedback.</li>
             <li><strong>Mark for Review</strong> flags a question; use "Next Review" to jump.</li>
             <li>Use the grid to jump to any question.</li>
@@ -299,7 +305,7 @@
           You can expand this page further with:
           <ul>
             <li>Exam mode (disable back navigation)</li>
-            <li>Shuffle questions/options</li>
+            <li>Shuffle questions</li>
             <li>Timer limit + auto-end</li>
             <li>Per-topic filtering</li>
             <li>Export results JSON</li>

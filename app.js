@@ -5,6 +5,9 @@ const state = {
   started: false,
   assessmentId: null,
   questions: [],
+  settings: {
+    shuffleOptions: false
+  },
   totalSeconds: 0,
   currentIndex: 0,
   perQuestionSeconds: [],
@@ -28,6 +31,7 @@ const startScreen = el('startScreen');
 const questionScreen = el('questionScreen');
 const assessmentSelect = el('assessmentSelect');
 const assessmentInfo = el('assessmentInfo');
+const shuffleOptionsToggle = el('shuffleOptionsToggle');
 
 const qIndex = el('qIndex');
 const qTotal = el('qTotal');
@@ -121,6 +125,8 @@ function saveSessionState() {
   const payload = {
     started: state.started,
     assessmentId: state.assessmentId,
+    shuffleOptions: state.settings.shuffleOptions,
+    sessionQuestions: state.questions,
     totalSeconds: state.totalSeconds,
     currentIndex: state.currentIndex,
     perQuestionSeconds: state.perQuestionSeconds,
@@ -168,6 +174,17 @@ function restoreSessionState() {
   }
 
   const total = assessment.questions.length;
+  if (!Array.isArray(parsed.sessionQuestions) || parsed.sessionQuestions.length !== total) {
+    clearSavedSession();
+    return false;
+  }
+  try {
+    validateQuestions(parsed.sessionQuestions);
+  } catch {
+    clearSavedSession();
+    return false;
+  }
+
   const requiredArrays = ['perQuestionSeconds', 'selected', 'revealed', 'isCorrect', 'markedReview'];
   const hasValidArrays = requiredArrays.every((key) => Array.isArray(parsed[key]) && parsed[key].length === total);
   if (!hasValidArrays) {
@@ -179,6 +196,12 @@ function restoreSessionState() {
   assessmentSelect.value = assessment.id;
 
   state.started = true;
+  state.settings.shuffleOptions = parsed.shuffleOptions === true;
+  shuffleOptionsToggle.checked = state.settings.shuffleOptions;
+  state.questions = parsed.sessionQuestions.map((q) => ({
+    ...q,
+    options: normalizeOptions(q.options).map((opt) => ({ key: opt.key, text: opt.text }))
+  }));
   state.totalSeconds = Number.isFinite(parsed.totalSeconds) ? Math.max(0, Math.floor(parsed.totalSeconds)) : 0;
   state.currentIndex = clamp(Number.isFinite(parsed.currentIndex) ? parsed.currentIndex : 0, 0, total - 1);
   state.perQuestionSeconds = parsed.perQuestionSeconds.slice();
@@ -202,6 +225,31 @@ function fmtTime(seconds) {
 
 function clamp(i, min, max) {
   return Math.max(min, Math.min(max, i));
+}
+
+function optionLabelByIndex(index) {
+  const code = 65 + index; // A=65
+  return code <= 90 ? String.fromCharCode(code) : String(index + 1);
+}
+
+function shuffleArray(items) {
+  const arr = items.slice();
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+function buildSessionQuestions(sourceQuestions, shuffleOptionsEnabled) {
+  return sourceQuestions.map((q) => {
+    // Keep option keys (A/B/C/...) unchanged so answer matching remains key-based after shuffle.
+    const options = normalizeOptions(q.options).map((opt) => ({ key: opt.key, text: opt.text }));
+    return {
+      ...q,
+      options: shuffleOptionsEnabled ? shuffleArray(options) : options
+    };
+  });
 }
 
 function validateQuestions(items) {
@@ -295,6 +343,14 @@ function getOptText(q, letter) {
   const options = normalizeOptions(q.options);
   const found = options.find((opt) => opt.key === letter);
   return found ? found.text : '';
+}
+
+function getDisplayLabelForKey(q, key) {
+  if (!key) return '';
+  const options = normalizeOptions(q.options);
+  const idx = options.findIndex((opt) => opt.key === key);
+  if (idx < 0) return key;
+  return optionLabelByIndex(idx);
 }
 
 function updateStats() {
@@ -409,7 +465,7 @@ function renderQuestion() {
   qReview.textContent = state.markedReview[i] ? 'Yes' : 'No';
 
   optionsWrap.innerHTML = '';
-  optsArray.forEach((opt) => {
+  optsArray.forEach((opt, optIndex) => {
     const card = document.createElement('div');
     card.className = 'opt';
     if (state.selected[i] === opt.key) card.classList.add('selected');
@@ -422,7 +478,7 @@ function renderQuestion() {
     label.className = 'lbl';
 
     const strong = document.createElement('strong');
-    strong.textContent = `${opt.key}. `;
+    strong.textContent = `${optionLabelByIndex(optIndex)}. `;
 
     label.appendChild(strong);
     label.appendChild(document.createTextNode(String(opt.text)));
@@ -485,14 +541,27 @@ function showFeedbackAfterReveal() {
   const i = state.currentIndex;
   const q = state.questions[i];
   const sel = state.selected[i];
+  const correctKey = q.answer;
+  const correctLabel = getDisplayLabelForKey(q, correctKey);
+  const correctText = getOptText(q, correctKey);
 
   if (!sel) {
-    showFeedback('warn', 'Select an option first', `Correct answer: ${q.answer}`);
+    showFeedback(
+      'warn',
+      'Select an option first',
+      `Correct answer: ${correctLabel}${correctText ? ` (${correctText})` : ''}`
+    );
     return;
   }
 
-  const ok = sel === q.answer;
-  showFeedback(ok ? 'good' : 'bad', ok ? 'Correct' : 'Wrong', `Your choice: ${sel} | Correct answer: ${q.answer}`);
+  const selectedLabel = getDisplayLabelForKey(q, sel);
+  const selectedText = getOptText(q, sel);
+  const ok = sel === correctKey;
+  showFeedback(
+    ok ? 'good' : 'bad',
+    ok ? 'Correct' : 'Wrong',
+    `Your choice: ${selectedLabel}${selectedText ? ` (${selectedText})` : ''} | Correct answer: ${correctLabel}${correctText ? ` (${correctText})` : ''}`
+  );
 }
 
 function revealAnswer() {
@@ -549,7 +618,15 @@ function startSession() {
     return;
   }
 
+  const current = getCurrentAssessment();
+  if (!current) {
+    alert('Selected assessment not found.');
+    return;
+  }
+
   stopTimers();
+  state.settings.shuffleOptions = shuffleOptionsToggle.checked;
+  state.questions = buildSessionQuestions(current.questions, state.settings.shuffleOptions);
   state.started = true;
   state.totalSeconds = 0;
   state.currentIndex = 0;
@@ -560,7 +637,6 @@ function startSession() {
   state.markedReview = Array(state.questions.length).fill(false);
 
   setMainMode(true);
-  const current = getCurrentAssessment();
   if (current) {
     mainTitle.textContent = current.name;
   }
@@ -584,6 +660,7 @@ function backToAssessmentSelection() {
   state.started = false;
   state.totalSeconds = 0;
   state.currentIndex = 0;
+  state.questions = getCurrentAssessment()?.questions || [];
   state.perQuestionSeconds = [];
   state.selected = [];
   state.revealed = [];
@@ -671,6 +748,8 @@ function renderWrongReviewCard() {
   const q = state.questions[qIdx];
   const sel = state.selected[qIdx];
   const correct = q.answer;
+  const selLabel = getDisplayLabelForKey(q, sel);
+  const corLabel = getDisplayLabelForKey(q, correct);
 
   wrongPos.textContent = String(pos + 1);
   wrongTotal.textContent = String(total);
@@ -687,8 +766,8 @@ function renderWrongReviewCard() {
     </div>
     <div class="qt">${escapeHtml(q.text)}</div>
     <div class="ans">
-      Your answer: <strong>${escapeHtml(sel)}</strong> ${selText ? `(${escapeHtml(selText)})` : ''}<br/>
-      Correct: <strong>${escapeHtml(correct)}</strong> ${corText ? `(${escapeHtml(corText)})` : ''}
+      Your answer: <strong>${escapeHtml(selLabel)}</strong> ${selText ? `(${escapeHtml(selText)})` : ''}<br/>
+      Correct: <strong>${escapeHtml(corLabel)}</strong> ${corText ? `(${escapeHtml(corText)})` : ''}
     </div>
   `;
 
@@ -758,6 +837,10 @@ backToAssessmentsBtn.addEventListener('click', backToAssessmentSelection);
 
 assessmentSelect.addEventListener('change', (e) => {
   selectAssessment(e.target.value);
+  if (!state.started) {
+    renderNavGrid();
+    updateEndButtonLabel();
+  }
 });
 
 showAnswerBtn.addEventListener('click', revealAnswer);
@@ -847,6 +930,9 @@ wrongReviewModal.addEventListener('click', (e) => {
   try {
     validateAssessments(assessmentList);
     populateAssessmentSelect();
+    if (shuffleOptionsToggle) {
+      shuffleOptionsToggle.checked = false;
+    }
     const restored = restoreSessionState();
 
     if (restored) {

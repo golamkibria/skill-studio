@@ -192,6 +192,24 @@
       gap:8px;
       margin-top: 2px;
     }
+    .settingsRow{
+      margin-top: 2px;
+    }
+    .checkboxLabel{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      font-size: 13px;
+      color: var(--text);
+      cursor: pointer;
+      user-select: none;
+    }
+    .checkboxLabel input{
+      width: 16px;
+      height: 16px;
+      accent-color: #4f6cff;
+      cursor: pointer;
+    }
     .assessmentBox select{
       width:100%;
       border-radius: 12px;

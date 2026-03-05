@@ -1,6 +1,6 @@
 # Skill Studio
 
-Skill Studio is a lightweight, single-page practice exam app built with plain HTML, CSS, and JavaScript. It runs fully in the browser with no backend and auto-saves active session progress in local browser storage.
+Skill Studio is a lightweight, single-page assessment app built with plain HTML, CSS, and JavaScript. It runs fully in the browser with no backend and auto-saves active session progress in local browser storage.
 
 ## Live Demo
 
@@ -9,7 +9,8 @@ GitHub Pages: https://golamkibria.github.io/skill-studio/
 ## Features
 
 - Multiple assessment support via `window.assessments`
-- One-question-at-a-time practice flow
+- One-question-at-a-time assessment flow
+- Optional per-assessment setting to shuffle question options
 - Instant answer checking with `Show Answer`
 - Mark-for-review and jump-to-review navigation
 - Question grid navigation (jump to any question)
@@ -33,7 +34,7 @@ GitHub Pages: https://golamkibria.github.io/skill-studio/
 
 1. Clone or download the project.
 2. Open `index.html` directly in a browser.
-3. Select an assessment and click `Start Practice`.
+3. Select an assessment and click `Start Assessment`.
 
 No build step or dependency install is required.
 
@@ -82,7 +83,7 @@ window.assessments = assessments;
 3. Click `Show Answer` to reveal correctness.
 4. Move with `Prev`, `Next`, `First`, `Last`, or question grid.
 5. Mark items for later using `Mark for Review`.
-6. Click `End Practice` to finalize unanswered checks and view summary.
+6. Click `End Assessment` to finalize unanswered checks and view summary.
 
 ## Keyboard Shortcuts
 
@@ -96,7 +97,7 @@ window.assessments = assessments;
 ## Behavior Details
 
 - Active session progress is auto-saved in browser `localStorage`.
-- Correct/Wrong counts update after reveal during practice.
+- Correct/Wrong counts update after reveal during assessment.
 - On end session, selected but unrevealed answers are evaluated in the final report.
 
 ## Customization Ideas
