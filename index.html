@@ -15,7 +15,7 @@
     <header>
       <div class="brand">
         <h1>Skill Studio</h1>
-        <div class="sub">One-page practice exam | Mobile friendly | In-memory session only</div>
+        <div class="sub">One-page practice exam | Mobile friendly | Auto-resume after refresh</div>
       </div>
       <div class="topbar">
         <div class="pill">Total Time: <strong id="totalTime">00:00</strong></div>
@@ -36,6 +36,7 @@
             <button id="startBtn">Start</button>
             <button class="secondary" id="resumeBtn" style="display:none;">Resume</button>
             <button class="secondary" id="restartBtn" style="display:none;">Restart</button>
+            <button class="ghost" id="backToAssessmentsBtn" style="display:none;">Back to Assessments</button>
           </div>
         </div>
 
@@ -44,7 +45,7 @@
           <div class="startScreen" id="startScreen">
             <p>
               Flow: Start -> one question at a time -> choose an option -> click "Show Answer" to instantly check correctness.
-              You can mark questions for review and navigate freely. Progress is kept only in memory until you end the session.
+              You can mark questions for review and navigate freely. Progress auto-saves in this browser and resumes after refresh.
             </p>
             <div class="assessmentBox">
               <label for="assessmentSelect" class="small">Select Assessment</label>
@@ -224,7 +225,7 @@
             <li>During practice, Correct/Wrong counts after <strong>Show Answer</strong>. 
                 When you click End Practice, the final report evaluates all answers you selected.  
             </li>
-            <li>All progress is kept in memory; refreshing the page resets the session.</li>
+            <li>Progress auto-saves in this browser during an active assessment.</li>
           </ul>
         </div>
 

@@ -1,6 +1,6 @@
 # Skill Studio
 
-Skill Studio is a lightweight, single-page practice exam app built with plain HTML, CSS, and JavaScript. It runs fully in the browser with no backend and keeps session state in memory only.
+Skill Studio is a lightweight, single-page practice exam app built with plain HTML, CSS, and JavaScript. It runs fully in the browser with no backend and auto-saves active session progress in local browser storage.
 
 ## Live Demo
 
@@ -17,6 +17,7 @@ GitHub Pages: https://golamkibria.github.io/skill-studio/
 - Summary modal with answered/correct/wrong/review counts
 - Average time per answered question
 - Wrong-answer review mode
+- Auto-resume active session after refresh (same browser)
 - Keyboard shortcuts for desktop use
 - Mobile-friendly layout
 
@@ -94,7 +95,7 @@ window.assessments = assessments;
 
 ## Behavior Details
 
-- Progress is in-memory only; refreshing the page resets the session.
+- Active session progress is auto-saved in browser `localStorage`.
 - Correct/Wrong counts update after reveal during practice.
 - On end session, selected but unrevealed answers are evaluated in the final report.
 

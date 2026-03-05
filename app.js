@@ -1,4 +1,5 @@
 const assessmentList = Array.isArray(window.assessments) ? window.assessments : [];
+const SESSION_STORAGE_KEY = 'skillStudio.activeSession.v1';
 
 const state = {
   started: false,
@@ -21,6 +22,7 @@ const startBtn2 = el('startBtn2');
 const resumeBtn = el('resumeBtn');
 const restartBtn = el('restartBtn');
 const restartBtn2 = el('restartBtn2');
+const backToAssessmentsBtn = el('backToAssessmentsBtn');
 
 const startScreen = el('startScreen');
 const questionScreen = el('questionScreen');
@@ -101,6 +103,92 @@ const wrongReviewState = {
   wrongIndexes: [],
   pos: 0
 };
+
+function clearSavedSession() {
+  try {
+    localStorage.removeItem(SESSION_STORAGE_KEY);
+  } catch (err) {
+    console.warn('Unable to clear saved session:', err);
+  }
+}
+
+function saveSessionState() {
+  if (!state.started) {
+    clearSavedSession();
+    return;
+  }
+
+  const payload = {
+    started: state.started,
+    assessmentId: state.assessmentId,
+    totalSeconds: state.totalSeconds,
+    currentIndex: state.currentIndex,
+    perQuestionSeconds: state.perQuestionSeconds,
+    selected: state.selected,
+    revealed: state.revealed,
+    isCorrect: state.isCorrect,
+    markedReview: state.markedReview
+  };
+
+  try {
+    localStorage.setItem(SESSION_STORAGE_KEY, JSON.stringify(payload));
+  } catch (err) {
+    console.warn('Unable to save session:', err);
+  }
+}
+
+function restoreSessionState() {
+  let raw = null;
+  try {
+    raw = localStorage.getItem(SESSION_STORAGE_KEY);
+  } catch (err) {
+    console.warn('Unable to read saved session:', err);
+    return false;
+  }
+
+  if (!raw) return false;
+
+  let parsed = null;
+  try {
+    parsed = JSON.parse(raw);
+  } catch {
+    clearSavedSession();
+    return false;
+  }
+
+  if (!parsed || parsed.started !== true || typeof parsed.assessmentId !== 'string') {
+    clearSavedSession();
+    return false;
+  }
+
+  const assessment = assessmentList.find((item) => item.id === parsed.assessmentId);
+  if (!assessment) {
+    clearSavedSession();
+    return false;
+  }
+
+  const total = assessment.questions.length;
+  const requiredArrays = ['perQuestionSeconds', 'selected', 'revealed', 'isCorrect', 'markedReview'];
+  const hasValidArrays = requiredArrays.every((key) => Array.isArray(parsed[key]) && parsed[key].length === total);
+  if (!hasValidArrays) {
+    clearSavedSession();
+    return false;
+  }
+
+  selectAssessment(assessment.id);
+  assessmentSelect.value = assessment.id;
+
+  state.started = true;
+  state.totalSeconds = Number.isFinite(parsed.totalSeconds) ? Math.max(0, Math.floor(parsed.totalSeconds)) : 0;
+  state.currentIndex = clamp(Number.isFinite(parsed.currentIndex) ? parsed.currentIndex : 0, 0, total - 1);
+  state.perQuestionSeconds = parsed.perQuestionSeconds.slice();
+  state.selected = parsed.selected.slice();
+  state.revealed = parsed.revealed.slice();
+  state.isCorrect = parsed.isCorrect.slice();
+  state.markedReview = parsed.markedReview.slice();
+
+  return true;
+}
 
 function pad2(n) {
   return String(n).padStart(2, '0');
@@ -247,6 +335,9 @@ function startTimers() {
   state.timers.total = setInterval(() => {
     state.totalSeconds++;
     totalTime.textContent = fmtTime(state.totalSeconds);
+    if (state.totalSeconds % 10 === 0) {
+      saveSessionState();
+    }
   }, 1000);
 
   state.timers.perQ = setInterval(() => {
@@ -264,6 +355,7 @@ function setMainMode(started) {
     startBtn2.style.display = '';
     resumeBtn.style.display = 'none';
     restartBtn.style.display = 'none';
+    backToAssessmentsBtn.style.display = 'none';
     return;
   }
 
@@ -273,6 +365,7 @@ function setMainMode(started) {
   startBtn2.style.display = 'none';
   resumeBtn.style.display = '';
   restartBtn.style.display = '';
+  backToAssessmentsBtn.style.display = '';
 }
 
 function renderNavGrid() {
@@ -360,6 +453,7 @@ function renderQuestion() {
   updateEndButtonLabel();
   updateTimersUI();
   updateNavGridStyles();
+  saveSessionState();
 }
 
 function selectOption(key) {
@@ -478,6 +572,34 @@ function startSession() {
   startTimers();
 }
 
+function backToAssessmentSelection() {
+  if (!state.started) return;
+
+  const confirmed = confirm('Return to assessment selection? Your current progress will be cleared.');
+  if (!confirmed) return;
+
+  stopTimers();
+  clearSavedSession();
+
+  state.started = false;
+  state.totalSeconds = 0;
+  state.currentIndex = 0;
+  state.perQuestionSeconds = [];
+  state.selected = [];
+  state.revealed = [];
+  state.isCorrect = [];
+  state.markedReview = [];
+
+  setMainMode(false);
+  startScreen.style.display = '';
+  questionScreen.style.display = 'none';
+  updateStats();
+  updateTimersUI();
+  updateEndButtonLabel();
+  hideFeedback();
+  renderNavGrid();
+}
+
 function endSession() {
   stopTimers();
 
@@ -494,6 +616,7 @@ function endSession() {
 
   finalizeEvaluation(state.questions, state);
   openSummary();
+  saveSessionState();
 }
 
 function openSummary() {
@@ -631,6 +754,7 @@ restartBtn2.addEventListener('click', () => {
   closeSummary();
   startSession();
 });
+backToAssessmentsBtn.addEventListener('click', backToAssessmentSelection);
 
 assessmentSelect.addEventListener('change', (e) => {
   selectAssessment(e.target.value);
@@ -723,10 +847,26 @@ wrongReviewModal.addEventListener('click', (e) => {
   try {
     validateAssessments(assessmentList);
     populateAssessmentSelect();
-    setMainMode(false);
-    renderNavGrid();
-    updateStats();
-    updateTimersUI();
+    const restored = restoreSessionState();
+
+    if (restored) {
+      setMainMode(true);
+      const current = getCurrentAssessment();
+      if (current) {
+        mainTitle.textContent = current.name;
+      }
+      startScreen.style.display = 'none';
+      questionScreen.style.display = '';
+      renderNavGrid();
+      renderQuestion();
+      startTimers();
+    } else {
+      setMainMode(false);
+      renderNavGrid();
+      updateStats();
+      updateTimersUI();
+      updateEndButtonLabel();
+    }
   } catch (err) {
     console.error(err);
     alert(`Initialization failed: ${err.message}`);
