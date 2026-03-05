@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Skill Studio</title>
+    <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <h1>Skill Studio</h1>
+        <div class="sub">One-page practice exam | Mobile friendly | In-memory session only</div>
+      </div>
+      <div class="topbar">
+        <div class="pill">Total Time: <strong id="totalTime">00:00</strong></div>
+        <div class="pill">Question Time: <strong id="qTime">00:00</strong></div>
+        <button class="ghost" id="openHelp">Help</button>
+      </div>
+    </header>
+
+    <div class="grid">
+      <!-- Main -->
+      <section class="card" id="mainCard">
+        <div class="hd">
+          <div class="title">
+            <div class="k" id="modeLabel">Skill Studio</div>
+            <div class="v" id="mainTitle">Start your assessment</div>
+          </div>
+          <div class="btnrow">
+            <button id="startBtn">Start</button>
+            <button class="secondary" id="resumeBtn" style="display:none;">Resume</button>
+            <button class="secondary" id="restartBtn" style="display:none;">Restart</button>
+          </div>
+        </div>
+
+        <div class="bd" id="mainBody">
+          <!-- Start screen -->
+          <div class="startScreen" id="startScreen">
+            <p>
+              Flow: Start -> one question at a time -> choose an option -> click "Show Answer" to instantly check correctness.
+              You can mark questions for review and navigate freely. Progress is kept only in memory until you end the session.
+            </p>
+            <div class="assessmentBox">
+              <label for="assessmentSelect" class="small">Select Assessment</label>
+              <select id="assessmentSelect"></select>
+              <div class="small" id="assessmentInfo"></div>
+            </div>
+            <div class="btnrow">
+              <button id="startBtn2" class="good">Start Practice</button>
+            </div>
+            <p class="small">
+              Tip: On mobile, swipe is not required - use the buttons.
+              On desktop, use <span class="kbd">Left</span>/<span class="kbd">Right</span> to move, <span class="kbd">S</span> to show answer, <span class="kbd">R</span> to mark review.
+            </p>
+          </div>
+
+          <!-- Question screen -->
+          <div id="questionScreen" style="display:none;">
+            <div class="qmeta">
+              <div class="chip">Q# <strong id="qIndex">1</strong>/<span id="qTotal">150</span></div>
+              <div class="chip">Status: <strong id="qStatus">Not answered</strong></div>
+              <div class="chip">Review: <strong id="qReview">No</strong></div>
+            </div>
+
+            <p class="qtext" id="qText"></p>
+
+            <div class="options" id="options"></div>
+
+            <div class="btnrow">
+              <button id="showAnswerBtn" class="good">Show Answer</button>
+              <button id="markReviewBtn" class="secondary">Mark for Review</button>
+              <button id="clearBtn" class="ghost">Clear Selection</button>
+            </div>
+
+            <div class="feedback" id="feedback">
+              <div class="line1" id="fbTitle"></div>
+              <div class="line2" id="fbDetail"></div>
+            </div>
+
+            <div class="footerActions">
+              <div class="btnrow">
+                <button id="prevBtn" class="secondary">&lt;- Prev</button>
+                <button id="nextBtn" class="secondary">Next -&gt;</button>
+                <button id="jumpFirstBtn" class="ghost">First</button>
+                <button id="jumpLastBtn" class="ghost">Last</button>
+              </div>
+              <div class="btnrow">
+                <button id="endBtn" class="bad">End Practice</button>
+              </div>
+            </div>
+
+            <div class="note" id="noteArea"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Side panel -->
+      <aside class="card side">
+        <div class="hd">
+          <div class="title">
+            <div class="k">Session</div>
+            <div class="v">Progress & Navigation</div>
+          </div>
+          <div class="miniBtns">
+            <button class="ghost" id="toggleGridBtn">Toggle Grid</button>
+            <button class="ghost" id="openSummaryBtn">Summary</button>
+          </div>
+        </div>
+        <div class="bd">
+          <div class="progress">
+            <div class="stat">
+              <div class="k">Answered</div>
+              <div class="v" id="answeredCount">0</div>
+            </div>
+            <div class="stat">
+              <div class="k">Correct</div>
+              <div class="v" id="correctCount">0</div>
+            </div>
+            <div class="stat">
+              <div class="k">Wrong</div>
+              <div class="v" id="wrongCount">0</div>
+            </div>
+            <div class="stat">
+              <div class="k">Marked Review</div>
+              <div class="v" id="reviewCount">0</div>
+            </div>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="panelRow">
+            <div class="small">Jump:</div>
+            <div class="miniBtns">
+              <button class="secondary" id="jumpUnansweredBtn">Next Unanswered</button>
+              <button class="secondary" id="jumpReviewBtn">Next Review</button>
+            </div>
+          </div>
+
+          <div id="gridWrap">
+            <div class="small">Legend: green=answered | orange=review | outlined=current</div>
+            <div class="navGrid" id="navGrid"></div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <!-- Summary Modal -->
+  <div class="modal" id="summaryModal" aria-hidden="true">
+    <div class="box" role="dialog" aria-modal="true" aria-labelledby="summaryTitle">
+      <div class="hd">
+        <h3 id="summaryTitle">Session Summary</h3>
+        <button class="ghost" id="closeSummaryBtn">Close</button>
+      </div>
+      <div class="bd">
+        <div class="scoreGrid">
+          <div class="stat">
+            <div class="k">Total Questions</div>
+            <div class="v" id="sumTotal">150</div>
+          </div>
+          <div class="stat">
+            <div class="k">Answered</div>
+            <div class="v" id="sumAnswered">0</div>
+          </div>
+          <div class="stat">
+            <div class="k">Correct</div>
+            <div class="v" id="sumCorrect">0</div>
+          </div>
+          <div class="stat">
+            <div class="k">Wrong</div>
+            <div class="v" id="sumWrong">0</div>
+          </div>
+          <div class="stat">
+            <div class="k">Marked for Review</div>
+            <div class="v" id="sumReview">0</div>
+          </div>
+          <div class="stat">
+            <div class="k">Total Time</div>
+            <div class="v" id="sumTime">00:00</div>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div id="wrongReviewWrap" style="margin-top:10px;">
+          <div class="stat" style="margin-bottom:10px;">
+            <div class="k">Wrong Answers</div>
+            <div class="v" id="wrongCountSummary">0</div>
+          </div>
+
+          <div class="btnrow">
+            <button id="reviewWrongBtn" class="secondary">Review Wrong Answers</button>
+          </div>
+
+          <div class="note" style="margin-top:8px;">
+            Review mode shows one wrong question at a time (better on mobile).
+          </div>
+        </div>
+        
+        <div class="small" id="speedLine"></div>
+        <div class="note">
+          Notes:
+          <ul>            
+            <li>During practice, Correct/Wrong counts after <strong>Show Answer</strong>. 
+                When you click End Practice, the final report evaluates all answers you selected.  
+            </li>
+            <li>All progress is kept in memory; refreshing the page resets the session.</li>
+          </ul>
+        </div>
+
+        <div class="btnrow">
+          <button id="continueBtn" class="secondary">Continue Practice</button>
+          <button id="restartBtn2" class="bad">Restart</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="wrongReviewModal" aria-hidden="true">
+  <div class="box" role="dialog" aria-modal="true" aria-labelledby="wrongReviewTitle">
+    <div class="hd">
+      <h3 id="wrongReviewTitle">Wrong Answers Review</h3>
+      <button class="ghost" id="closeWrongReviewBtn">Close</button>
+    </div>
+    <div class="bd">
+      <div class="chip" style="margin-bottom:10px;">
+        Wrong <strong id="wrongPos">0</strong>/<span id="wrongTotal">0</span>
+      </div>
+
+      <div class="wrongItem" id="wrongCard"></div>
+
+      <div class="footerActions" style="margin-top:12px;">
+        <div class="btnrow">
+          <button id="prevWrongBtn" class="secondary">&lt;- Prev</button>
+          <button id="nextWrongBtn" class="secondary">Next -&gt;</button>
+        </div>
+        <div class="btnrow">
+          <button id="gotoWrongBtn" class="ghost">Go to Question</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <!-- Help Modal -->
+  <div class="modal" id="helpModal" aria-hidden="true">
+    <div class="box" role="dialog" aria-modal="true" aria-labelledby="helpTitle">
+      <div class="hd">
+        <h3 id="helpTitle">Help & Shortcuts</h3>
+        <button class="ghost" id="closeHelpBtn">Close</button>
+      </div>
+      <div class="bd">
+        <div class="small">
+          <ul>
+            <li><strong>Start</strong> begins a new practice session.</li>
+            <li>Select an option, then press <strong>Show Answer</strong> to get instant correctness feedback.</li>
+            <li><strong>Mark for Review</strong> flags a question; use "Next Review" to jump.</li>
+            <li>Use the grid to jump to any question.</li>
+          </ul>
+          <div class="divider"></div>
+          <div><strong>Keyboard shortcuts (desktop):</strong></div>
+          <ul>
+            <li><span class="kbd">Right</span> Next</li>
+            <li><span class="kbd">Left</span> Prev</li>
+            <li><span class="kbd">S</span> Show Answer</li>
+            <li><span class="kbd">R</span> Toggle Review</li>
+            <li><span class="kbd">C</span> Clear Selection</li>
+            <li><span class="kbd">G</span> Open Summary</li>
+          </ul>
+        </div>
+        <div class="note">
+          You can expand this page further with:
+          <ul>
+            <li>Exam mode (disable back navigation)</li>
+            <li>Shuffle questions/options</li>
+            <li>Timer limit + auto-end</li>
+            <li>Per-topic filtering</li>
+            <li>Export results JSON</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script src="./assessments.data.js"></script>
+<script src="./scoring-utils.js"></script>
+<script src="./app.js"></script>
+</body>
+</html>
