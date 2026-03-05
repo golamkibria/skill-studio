@@ -10,12 +10,10 @@ GitHub Pages: https://golamkibria.github.io/skill-studio/
 
 - Multiple assessment support via `window.assessments`
 - One-question-at-a-time assessment flow
-- Optional per-assessment setting to shuffle question options
-- Optional timed assessment setting (minutes) with auto-end on timeout
-- Explicit `Use time limit` toggle for quick untimed practice mode
-- Optional setting to disable `Show Answer` during assessment (results shown at end)
-- Pause/Resume support (including persisted paused state on refresh)
-- Instant answer checking with `Show Answer`
+- Start settings: `Enable Show Answer during assessment`, `Use time limit`, `Time limit (minutes)`, `Shuffle answer choices`
+- Timed mode with countdown (`Time Left`) and auto-end at timeout
+- Pause/Resume support (button + `P` shortcut), including persisted paused state on refresh
+- Instant answer checking with `Show Answer` (when enabled)
 - Mark-for-review and jump-to-review navigation
 - Question grid navigation (jump to any question)
 - Session timers (total elapsed and per-question)
@@ -23,6 +21,7 @@ GitHub Pages: https://golamkibria.github.io/skill-studio/
 - Average time per answered question
 - Wrong-answer review mode
 - Auto-resume active session after refresh (same browser)
+- Back-to-assessment-selection action for clearing active session
 - Keyboard shortcuts for desktop use
 - Mobile-friendly layout
 
@@ -38,7 +37,7 @@ GitHub Pages: https://golamkibria.github.io/skill-studio/
 
 1. Clone or download the project.
 2. Open `index.html` directly in a browser.
-3. Select an assessment and click `Start Assessment`.
+3. Select an assessment, choose settings, and click `Start Assessment`.
 
 No build step or dependency install is required.
 
@@ -81,21 +80,23 @@ window.assessments = assessments;
 - `answer` must match one of the option keys.
 - `timedMinutes` is optional; if set, it pre-fills the timed assessment input.
 - App validates assessment/question structure at startup.
+- Option keys are preserved internally for scoring, even when answer choices are shuffled.
 
 ## Usage Flow
 
 1. Start a session.
 2. Select an option for the current question.
-3. Click `Show Answer` to reveal correctness.
+3. Click `Show Answer` to reveal correctness (if enabled in settings).
 4. Move with `Prev`, `Next`, `First`, `Last`, or question grid.
 5. Mark items for later using `Mark for Review`.
-6. Click `End Assessment` to finalize unanswered checks and view summary.
+6. Optionally `Pause`/`Resume` during session.
+7. Click `End Assessment` to finalize unanswered checks and view summary.
 
 ## Keyboard Shortcuts
 
 - `Right Arrow` - Next question
 - `Left Arrow` - Previous question
-- `S` - Show answer
+- `S` - Show answer (only when show-answer mode is enabled)
 - `R` - Toggle review mark
 - `C` - Clear selection
 - `G` - Open summary
@@ -104,14 +105,15 @@ window.assessments = assessments;
 ## Behavior Details
 
 - Active session progress is auto-saved in browser `localStorage`.
-- Correct/Wrong counts update after reveal during assessment.
+- Correct/Wrong counts update after reveal during assessment (or at end if show-answer mode is disabled).
 - On end session, selected but unrevealed answers are evaluated in the final report.
+- If timed mode is enabled, assessment auto-ends when time reaches zero.
+- Refresh/tab close during active session shows a browser confirmation prompt.
 
 ## Customization Ideas
 
 - Add exam mode (disable back navigation)
-- Shuffle questions and/or options
-- Add time limit with auto-end
+- Shuffle questions
 - Filter by topic/difficulty
 - Export session result JSON
 
