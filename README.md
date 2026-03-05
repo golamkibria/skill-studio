@@ -144,7 +144,7 @@ This project is licensed under the MIT License. See `LICENSE` for details.
 
 ## Security
 
-If you find a security issue, please open a private report via GitHub security advisories or contact the maintainer before public disclosure.
+See `SECURITY.md` for the vulnerability reporting process.
 
 ## Maintainer
 
