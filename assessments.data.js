@@ -174,1178 +174,1177 @@ const assessments = [
   }
 ];
 
-
-
 const finalMockQuestions = [
   {
     "id": 1,
-    "topic": "ICT Concepts",
-    "difficulty": "Mixed",
+    "topic": "Hardware",
+    "difficulty": "Easy–Moderate",
     "text": "Hardware means:",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "Programs",
+      "B": "Physical parts",
+      "C": "Internet",
+      "D": "Data"
     },
     "answer": "B"
   },
   {
     "id": 2,
-    "topic": "ICT Concepts",
-    "difficulty": "Mixed",
+    "topic": "Input Devices",
+    "difficulty": "Easy–Moderate",
     "text": "Which is an input device?",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "Printer",
+      "B": "Monitor",
+      "C": "Keyboard",
+      "D": "Speaker"
     },
     "answer": "C"
   },
   {
     "id": 3,
-    "topic": "ICT Concepts",
-    "difficulty": "Mixed",
+    "topic": "CPU",
+    "difficulty": "Easy–Moderate",
     "text": "CPU stands for:",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "Central Processing Unit",
+      "B": "Computer Power Unit",
+      "C": "Central Program Utility",
+      "D": "Control Power Unit"
     },
     "answer": "A"
   },
   {
     "id": 4,
-    "topic": "ICT Concepts",
-    "difficulty": "Mixed",
+    "topic": "Memory (RAM)",
+    "difficulty": "Easy–Moderate",
     "text": "RAM is:",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "Permanent",
+      "B": "Temporary",
+      "C": "Optical",
+      "D": "Cloud"
     },
     "answer": "B"
   },
   {
     "id": 5,
-    "topic": "ICT Concepts",
-    "difficulty": "Mixed",
+    "topic": "Memory (ROM)",
+    "difficulty": "Easy–Moderate",
     "text": "ROM stores:",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "Temporary data",
+      "B": "Startup instructions",
+      "C": "Music",
+      "D": "Sound"
     },
     "answer": "B"
   },
   {
     "id": 6,
-    "topic": "ICT Concepts",
-    "difficulty": "Mixed",
+    "topic": "Output Devices",
+    "difficulty": "Easy–Moderate",
     "text": "Monitor is an:",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "Input device",
+      "B": "Output device",
+      "C": "Storage device",
+      "D": "Processing device"
     },
     "answer": "B"
   },
   {
     "id": 7,
-    "topic": "ICT Concepts",
-    "difficulty": "Mixed",
+    "topic": "Storage",
+    "difficulty": "Easy–Moderate",
     "text": "SSD is faster than:",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "Cache",
+      "B": "HDD",
+      "C": "RAM",
+      "D": "ROM"
     },
     "answer": "B"
   },
   {
     "id": 8,
-    "topic": "ICT Concepts",
-    "difficulty": "Mixed",
+    "topic": "Output Devices",
+    "difficulty": "Easy–Moderate",
     "text": "Printer gives:",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "Soft copy",
+      "B": "Hard copy",
+      "C": "Audio",
+      "D": "Input"
     },
     "answer": "B"
   },
   {
     "id": 9,
-    "topic": "ICT Concepts",
-    "difficulty": "Mixed",
+    "topic": "Cloud",
+    "difficulty": "Easy–Moderate",
     "text": "Cloud storage requires:",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "PSU",
+      "B": "Internet",
+      "C": "Mouse",
+      "D": "Printer"
     },
     "answer": "B"
   },
   {
     "id": 10,
-    "topic": "ICT Concepts",
-    "difficulty": "Mixed",
+    "topic": "Motherboard",
+    "difficulty": "Easy–Moderate",
     "text": "Motherboard connects:",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "Printer only",
+      "B": "All components",
+      "C": "Only RAM",
+      "D": "Only CPU"
     },
     "answer": "B"
   },
   {
     "id": 11,
-    "topic": "ICT Concepts",
-    "difficulty": "Mixed",
+    "topic": "Software",
+    "difficulty": "Easy–Moderate",
     "text": "Which is application software?",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "Windows",
+      "B": "Linux",
+      "C": "MS Word",
+      "D": "Driver"
     },
     "answer": "C"
   },
   {
     "id": 12,
-    "topic": "ICT Concepts",
-    "difficulty": "Mixed",
+    "topic": "Power (PSU)",
+    "difficulty": "Easy–Moderate",
     "text": "PSU provides:",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "Memory",
+      "B": "Electricity",
+      "C": "Data",
+      "D": "Sound"
     },
     "answer": "B"
   },
   {
     "id": 13,
-    "topic": "ICT Concepts",
-    "difficulty": "Mixed",
+    "topic": "Input/Output",
+    "difficulty": "Easy–Moderate",
     "text": "Touchscreen is:",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "Input only",
+      "B": "Output only",
+      "C": "Both",
+      "D": "Storage"
     },
     "answer": "C"
   },
   {
     "id": 14,
-    "topic": "ICT Concepts",
-    "difficulty": "Mixed",
+    "topic": "Input Devices",
+    "difficulty": "Easy–Moderate",
     "text": "Scanner converts:",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "Paper to digital",
+      "B": "Digital to paper",
+      "C": "Sound to image",
+      "D": "Image to sound"
     },
     "answer": "A"
   },
   {
     "id": 15,
-    "topic": "ICT Concepts",
-    "difficulty": "Mixed",
+    "topic": "Memory (Cache)",
+    "difficulty": "Easy–Moderate",
     "text": "Cache memory is:",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "Slow",
+      "B": "Fast",
+      "C": "Optical",
+      "D": "Cloud"
     },
     "answer": "B"
   },
   {
     "id": 16,
-    "topic": "ICT Concepts",
-    "difficulty": "Mixed",
+    "topic": "API",
+    "difficulty": "Easy–Moderate",
     "text": "API connects:",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "Hardware",
+      "B": "Software to software",
+      "C": "PSU",
+      "D": "Printer"
     },
     "answer": "B"
   },
   {
     "id": 17,
-    "topic": "ICT Concepts",
-    "difficulty": "Mixed",
+    "topic": "Utility Software",
+    "difficulty": "Easy–Moderate",
     "text": "Antivirus is example of:",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "System software",
+      "B": "Utility software",
+      "C": "Storage",
+      "D": "Input"
     },
     "answer": "B"
   },
   {
     "id": 18,
-    "topic": "ICT Concepts",
-    "difficulty": "Mixed",
+    "topic": "Input Devices",
+    "difficulty": "Easy–Moderate",
     "text": "Joystick is used for:",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "Printing",
+      "B": "Gaming",
+      "C": "Storage",
+      "D": "Typing"
     },
     "answer": "B"
   },
   {
     "id": 19,
-    "topic": "ICT Concepts",
-    "difficulty": "Mixed",
+    "topic": "Output Devices",
+    "difficulty": "Easy–Moderate",
     "text": "Speaker outputs:",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "Image",
+      "B": "Text",
+      "C": "Sound",
+      "D": "Storage"
     },
     "answer": "C"
   },
   {
     "id": 20,
-    "topic": "ICT Concepts",
-    "difficulty": "Mixed",
+    "topic": "IPO Cycle",
+    "difficulty": "Easy–Moderate",
     "text": "IPO cycle begins with:",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "Process",
+      "B": "Output",
+      "C": "Input",
+      "D": "Storage"
     },
     "answer": "C"
   },
   {
     "id": 21,
-    "topic": "ICT Concepts",
-    "difficulty": "Mixed",
+    "topic": "Memory (RAM)",
+    "difficulty": "Moderate–Hard",
     "text": "If RAM is removed, computer will:",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "Run faster",
+      "B": "Fail to operate properly",
+      "C": "Print faster",
+      "D": "Store more"
     },
     "answer": "B"
   },
   {
     "id": 22,
-    "topic": "ICT Concepts",
-    "difficulty": "Mixed",
+    "topic": "Cooling",
+    "difficulty": "Moderate–Hard",
     "text": "Which device prevents overheating?",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "PSU",
+      "B": "Fan",
+      "C": "Scanner",
+      "D": "UI"
     },
     "answer": "B"
   },
   {
     "id": 23,
-    "topic": "ICT Concepts",
-    "difficulty": "Mixed",
+    "topic": "Drivers",
+    "difficulty": "Moderate–Hard",
     "text": "Device driver allows:",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "User typing",
+      "B": "Hardware-OS communication",
+      "C": "Internet access",
+      "D": "Printing only"
     },
     "answer": "B"
   },
   {
     "id": 24,
-    "topic": "ICT Concepts",
-    "difficulty": "Mixed",
+    "topic": "Storage",
+    "difficulty": "Moderate–Hard",
     "text": "HDD belongs to:",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "Primary storage",
+      "B": "Secondary storage",
+      "C": "Cache",
+      "D": "Cloud"
     },
     "answer": "B"
   },
   {
     "id": 25,
-    "topic": "ICT Concepts",
-    "difficulty": "Mixed",
+    "topic": "Hardware vs Software",
+    "difficulty": "Moderate–Hard",
     "text": "Which is NOT hardware?",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "Motherboard",
+      "B": "Windows",
+      "C": "PSU",
+      "D": "RAM"
     },
     "answer": "B"
   },
   {
     "id": 26,
-    "topic": "ICT Concepts",
-    "difficulty": "Mixed",
+    "topic": "Motherboard",
+    "difficulty": "Moderate–Hard",
     "text": "Removing motherboard causes:",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "No sound",
+      "B": "No connectivity between components",
+      "C": "Slow internet",
+      "D": "Printer issue"
     },
     "answer": "B"
   },
   {
     "id": 27,
-    "topic": "ICT Concepts",
-    "difficulty": "Mixed",
+    "topic": "Memory (Cache)",
+    "difficulty": "Moderate–Hard",
     "text": "Which memory is closest to CPU?",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "SSD",
+      "B": "HDD",
+      "C": "Cache",
+      "D": "Cloud"
     },
     "answer": "C"
   },
   {
     "id": 28,
-    "topic": "ICT Concepts",
-    "difficulty": "Mixed",
+    "topic": "Performance",
+    "difficulty": "Moderate–Hard",
     "text": "Increasing RAM improves:",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "Monitor brightness",
+      "B": "Multitasking",
+      "C": "Sound",
+      "D": "Printing"
     },
     "answer": "B"
   },
   {
     "id": 29,
-    "topic": "ICT Concepts",
-    "difficulty": "Mixed",
+    "topic": "Output Devices",
+    "difficulty": "Moderate–Hard",
     "text": "Projector is an:",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "Input device",
+      "B": "Output device",
+      "C": "Storage",
+      "D": "CPU"
     },
     "answer": "B"
   },
   {
     "id": 30,
-    "topic": "ICT Concepts",
-    "difficulty": "Mixed",
+    "topic": "BIOS/ROM",
+    "difficulty": "Moderate–Hard",
     "text": "BIOS is stored in:",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "RAM",
+      "B": "ROM",
+      "C": "HDD",
+      "D": "Cloud"
     },
     "answer": "B"
   },
   {
     "id": 31,
-    "topic": "ICT Concepts",
-    "difficulty": "Mixed",
+    "topic": "Memory (RAM)",
+    "difficulty": "Moderate–Hard",
     "text": "Which storage is erased when power off?",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "HDD",
+      "B": "SSD",
+      "C": "RAM",
+      "D": "Cloud"
     },
     "answer": "C"
   },
   {
     "id": 32,
-    "topic": "ICT Concepts",
-    "difficulty": "Mixed",
+    "topic": "Portability",
+    "difficulty": "Moderate–Hard",
     "text": "Portability refers to:",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "Speed",
+      "B": "Capacity",
+      "C": "Easy to carry",
+      "D": "Cooling"
     },
     "answer": "C"
   },
   {
     "id": 33,
-    "topic": "ICT Concepts",
-    "difficulty": "Mixed",
+    "topic": "Operating System",
+    "difficulty": "Moderate–Hard",
     "text": "Which software manages CPU and memory?",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "OS",
+      "B": "Word",
+      "C": "Browser",
+      "D": "Antivirus"
     },
     "answer": "A"
   },
   {
     "id": 34,
-    "topic": "ICT Concepts",
-    "difficulty": "Mixed",
+    "topic": "Database",
+    "difficulty": "Moderate–Hard",
     "text": "Database is used for:",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "Electricity",
+      "B": "Data storage",
+      "C": "Printing",
+      "D": "Cooling"
     },
     "answer": "B"
   },
   {
     "id": 35,
-    "topic": "ICT Concepts",
-    "difficulty": "Mixed",
+    "topic": "Cloud",
+    "difficulty": "Moderate–Hard",
     "text": "Cloud storage data is saved on:",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "Local RAM",
+      "B": "Online servers",
+      "C": "CPU",
+      "D": "Monitor"
     },
     "answer": "B"
   },
   {
     "id": 36,
-    "topic": "ICT Concepts",
-    "difficulty": "Mixed",
+    "topic": "Input Devices",
+    "difficulty": "Moderate–Hard",
     "text": "Which device records voice?",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "Speaker",
+      "B": "Printer",
+      "C": "Microphone",
+      "D": "Monitor"
     },
     "answer": "C"
   },
   {
     "id": 37,
-    "topic": "ICT Concepts",
-    "difficulty": "Mixed",
+    "topic": "Optical Storage",
+    "difficulty": "Moderate–Hard",
     "text": "Optical disk uses:",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "Laser",
+      "B": "Magnet",
+      "C": "Heat",
+      "D": "Wind"
     },
     "answer": "A"
   },
   {
     "id": 38,
-    "topic": "ICT Concepts",
-    "difficulty": "Mixed",
+    "topic": "Cooling",
+    "difficulty": "Moderate–Hard",
     "text": "If cooling system fails, system may:",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "Overheat",
+      "B": "Freeze printing",
+      "C": "Lose internet",
+      "D": "Delete data"
     },
     "answer": "A"
   },
   {
     "id": 39,
-    "topic": "ICT Concepts",
-    "difficulty": "Mixed",
+    "topic": "User Interface",
+    "difficulty": "Moderate–Hard",
     "text": "UI helps in:",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "Cooling",
+      "B": "User interaction",
+      "C": "Storage",
+      "D": "Electricity"
     },
     "answer": "B"
   },
   {
     "id": 40,
-    "topic": "ICT Concepts",
-    "difficulty": "Mixed",
+    "topic": "Computer System",
+    "difficulty": "Moderate–Hard",
     "text": "A complete computer system requires:",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "Hardware only",
+      "B": "Software only",
+      "C": "Hardware + Software",
+      "D": "Internet only"
     },
     "answer": "C"
   },
   {
     "id": 41,
-    "topic": "ICT Concepts",
-    "difficulty": "Mixed",
+    "topic": "Primary Storage",
+    "difficulty": "Hard",
     "text": "Which pair represents primary storage?",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "RAM + Cache",
+      "B": "HDD + SSD",
+      "C": "CD + USB",
+      "D": "Cloud + HDD"
     },
     "answer": "A"
   },
   {
     "id": 42,
-    "topic": "ICT Concepts",
-    "difficulty": "Mixed",
+    "topic": "Memory Speed",
+    "difficulty": "Hard",
     "text": "Which is fastest memory?",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "HDD",
+      "B": "SSD",
+      "C": "Cache",
+      "D": "Cloud"
     },
     "answer": "C"
   },
   {
     "id": 43,
-    "topic": "ICT Concepts",
-    "difficulty": "Mixed",
+    "topic": "Output Devices",
+    "difficulty": "Hard",
     "text": "Which device converts digital file to paper output?",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "Scanner",
+      "B": "Printer",
+      "C": "Monitor",
+      "D": "Joystick"
     },
     "answer": "B"
   },
   {
     "id": 44,
-    "topic": "ICT Concepts",
-    "difficulty": "Mixed",
+    "topic": "Power (PSU)",
+    "difficulty": "Hard",
     "text": "Removing PSU will cause:",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "No display",
+      "B": "No power",
+      "C": "No sound",
+      "D": "No internet"
     },
     "answer": "B"
   },
   {
     "id": 45,
-    "topic": "ICT Concepts",
-    "difficulty": "Mixed",
+    "topic": "Portability",
+    "difficulty": "Hard",
     "text": "Which storage is most portable?",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "Internal HDD",
+      "B": "USB Flash Drive",
+      "C": "Cache",
+      "D": "PSU"
     },
     "answer": "B"
   },
   {
     "id": 46,
-    "topic": "ICT Concepts",
-    "difficulty": "Mixed",
+    "topic": "Hardware vs Software",
+    "difficulty": "Hard",
     "text": "Software without hardware is:",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "Fully functional",
+      "B": "Useless",
+      "C": "Faster",
+      "D": "Automatic"
     },
     "answer": "B"
   },
   {
     "id": 47,
-    "topic": "ICT Concepts",
-    "difficulty": "Mixed",
+    "topic": "Operating System",
+    "difficulty": "Hard",
     "text": "Which software is necessary to start computer?",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "OS",
+      "B": "Excel",
+      "C": "Chrome",
+      "D": "Photoshop"
     },
     "answer": "A"
   },
   {
     "id": 48,
-    "topic": "ICT Concepts",
-    "difficulty": "Mixed",
+    "topic": "Input/Output",
+    "difficulty": "Hard",
     "text": "Which device can act as both input and output?",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "Printer",
+      "B": "Touchscreen",
+      "C": "Scanner",
+      "D": "Speaker"
     },
     "answer": "B"
   },
   {
     "id": 49,
-    "topic": "ICT Concepts",
-    "difficulty": "Mixed",
+    "topic": "Performance",
+    "difficulty": "Hard",
     "text": "Which improves processing speed most directly?",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "Increasing RAM",
+      "B": "Adding printer",
+      "C": "Adding speaker",
+      "D": "Changing mouse"
     },
     "answer": "A"
   },
   {
     "id": 50,
-    "topic": "ICT Concepts",
-    "difficulty": "Mixed",
+    "topic": "Expansion",
+    "difficulty": "Hard",
     "text": "Which device adds video and sound capability?",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "Expansion card",
+      "B": "PSU",
+      "C": "RAM",
+      "D": "ROM"
     },
     "answer": "A"
   },
   {
     "id": 51,
-    "topic": "ICT Concepts",
-    "difficulty": "Mixed",
+    "topic": "Storage",
+    "difficulty": "Hard",
     "text": "If saved files disappear permanently, which failed?",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "RAM",
+      "B": "Secondary storage",
+      "C": "Cache",
+      "D": "UI"
     },
     "answer": "B"
   },
   {
     "id": 52,
-    "topic": "ICT Concepts",
-    "difficulty": "Mixed",
+    "topic": "Software",
+    "difficulty": "Hard",
     "text": "OS is example of:",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "Application software",
+      "B": "System software",
+      "C": "Storage",
+      "D": "Hardware"
     },
     "answer": "B"
   },
   {
     "id": 53,
-    "topic": "ICT Concepts",
-    "difficulty": "Mixed",
+    "topic": "Storage",
+    "difficulty": "Hard",
     "text": "Hard Disk is used for:",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "Temporary memory",
+      "B": "Permanent storage",
+      "C": "Cooling",
+      "D": "Input"
     },
     "answer": "B"
   },
   {
     "id": 54,
-    "topic": "ICT Concepts",
-    "difficulty": "Mixed",
+    "topic": "API",
+    "difficulty": "Hard",
     "text": "API connects:",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "Hardware to electricity",
+      "B": "Software to software",
+      "C": "Printer to PSU",
+      "D": "RAM to ROM"
     },
     "answer": "B"
   },
   {
     "id": 55,
-    "topic": "ICT Concepts",
-    "difficulty": "Mixed",
+    "topic": "Memory (Cache)",
+    "difficulty": "Hard",
     "text": "Removing cache results in:",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "Faster system",
+      "B": "Slower processing",
+      "C": "No printing",
+      "D": "No display"
     },
     "answer": "B"
   },
   {
     "id": 56,
-    "topic": "ICT Concepts",
-    "difficulty": "Mixed",
+    "topic": "Output Devices",
+    "difficulty": "Hard",
     "text": "Which device gives private sound output?",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "Speaker",
+      "B": "Headphones",
+      "C": "Monitor",
+      "D": "Scanner"
     },
     "answer": "B"
   },
   {
     "id": 57,
-    "topic": "ICT Concepts",
-    "difficulty": "Mixed",
+    "topic": "IPO Cycle",
+    "difficulty": "Hard",
     "text": "IPO order is:",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "Input → Output → Process",
+      "B": "Process → Input → Output",
+      "C": "Input → Process → Output",
+      "D": "Output → Process → Input"
     },
     "answer": "C"
   },
   {
     "id": 58,
-    "topic": "ICT Concepts",
-    "difficulty": "Mixed",
+    "topic": "BIOS",
+    "difficulty": "Hard",
     "text": "BIOS helps in:",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "Printing",
+      "B": "Starting computer",
+      "C": "Playing music",
+      "D": "Internet browsing"
     },
     "answer": "B"
   },
   {
     "id": 59,
-    "topic": "ICT Concepts",
-    "difficulty": "Mixed",
+    "topic": "Secondary Storage",
+    "difficulty": "Hard",
     "text": "Which is NOT secondary storage?",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "SSD",
+      "B": "HDD",
+      "C": "RAM",
+      "D": "CD"
     },
     "answer": "C"
   },
   {
     "id": 60,
-    "topic": "ICT Concepts",
-    "difficulty": "Mixed",
+    "topic": "Concepts",
+    "difficulty": "Hard",
     "text": "Computer works according to:",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "Emotions",
+      "B": "Guess",
+      "C": "Instructions",
+      "D": "Temperature"
     },
     "answer": "C"
   }
 ];
+
 const ultraHardQuestions = [
   {
     "id": 1,
-    "topic": "ICT Advanced",
+    "topic": "Multi-Concept Logic",
     "difficulty": "Ultra-Hard",
     "text": "A student types a document, saves it to Google Drive, then prints it. Which sequence correctly represents storage types used?",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "Primary → Secondary → Cloud",
+      "B": "Primary → Cloud → Output",
+      "C": "Secondary → Primary → Output",
+      "D": "Cloud → Primary → Output"
     },
     "answer": "B"
   },
   {
     "id": 2,
-    "topic": "ICT Advanced",
+    "topic": "Boot Process",
     "difficulty": "Ultra-Hard",
     "text": "Which component failure will MOST likely cause the system to power on but not boot into OS?",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "Speaker",
+      "B": "ROM",
+      "C": "Printer",
+      "D": "Mouse"
     },
     "answer": "B"
   },
   {
     "id": 3,
-    "topic": "ICT Advanced",
+    "topic": "Memory (Cache)",
     "difficulty": "Ultra-Hard",
     "text": "If cache memory is removed but RAM remains, what is most expected?",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "Computer stops",
+      "B": "Processing slows slightly",
+      "C": "Storage lost",
+      "D": "Power failure"
     },
     "answer": "B"
   },
   {
     "id": 4,
-    "topic": "ICT Advanced",
+    "topic": "Performance",
     "difficulty": "Ultra-Hard",
     "text": "Which combination improves both speed and multitasking?",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "Increase RAM + Faster SSD",
+      "B": "Bigger monitor + Printer",
+      "C": "Add joystick + Speaker",
+      "D": "Add PSU"
     },
     "answer": "A"
   },
   {
     "id": 5,
-    "topic": "ICT Advanced",
+    "topic": "Drivers + Hardware",
     "difficulty": "Ultra-Hard",
     "text": "Which device requires both driver software and physical connection to function?",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "Printer",
+      "B": "Cloud",
+      "C": "API",
+      "D": "Database"
     },
     "answer": "A"
   },
   {
     "id": 6,
-    "topic": "ICT Advanced",
+    "topic": "Cooling",
     "difficulty": "Ultra-Hard",
     "text": "A computer overheats frequently and shuts down. Which TWO components should be checked first?",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "PSU & RAM",
+      "B": "Fan & Thermal cooling",
+      "C": "Monitor & Printer",
+      "D": "SSD & Cloud"
     },
     "answer": "B"
   },
   {
     "id": 7,
-    "topic": "ICT Advanced",
+    "topic": "Volatile Storage",
     "difficulty": "Ultra-Hard",
     "text": "A file saved yesterday is missing after restart. It was not saved externally. Most likely cause:",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "HDD failure",
+      "B": "RAM-based temporary save",
+      "C": "OS crash",
+      "D": "Speaker malfunction"
     },
     "answer": "B"
   },
   {
     "id": 8,
-    "topic": "ICT Advanced",
+    "topic": "IPO Cycle",
     "difficulty": "Ultra-Hard",
     "text": "Which scenario involves all three: input, process, output?",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "Printing a saved file",
+      "B": "Typing and seeing text appear",
+      "C": "Watching a movie",
+      "D": "Turning on PSU"
     },
     "answer": "B"
   },
   {
     "id": 9,
-    "topic": "ICT Advanced",
+    "topic": "Drivers",
     "difficulty": "Ultra-Hard",
     "text": "A biometric login fails due to missing driver. Which layer failed?",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "Hardware",
+      "B": "Software interface",
+      "C": "Storage",
+      "D": "Cooling"
     },
     "answer": "B"
   },
   {
     "id": 10,
-    "topic": "ICT Advanced",
+    "topic": "Motherboard",
     "difficulty": "Ultra-Hard",
     "text": "If motherboard fails, which function is directly affected?",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "Inter-component communication",
+      "B": "Internet only",
+      "C": "Audio only",
+      "D": "Storage only"
     },
     "answer": "A"
   },
   {
     "id": 11,
-    "topic": "ICT Advanced",
+    "topic": "RAM vs Cache",
     "difficulty": "Ultra-Hard",
     "text": "Which is TRUE regarding RAM and Cache?",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "Both are permanent",
+      "B": "Cache is slower",
+      "C": "Both are temporary",
+      "D": "RAM is faster than Cache"
     },
     "answer": "C"
   },
   {
     "id": 12,
-    "topic": "ICT Advanced",
+    "topic": "Cloud vs HDD",
     "difficulty": "Ultra-Hard",
     "text": "Cloud storage differs from HDD because it:",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "Is temporary",
+      "B": "Uses RAM",
+      "C": "Stores data remotely via internet",
+      "D": "Uses laser"
     },
     "answer": "C"
   },
   {
     "id": 13,
-    "topic": "ICT Advanced",
+    "topic": "Power (PSU)",
     "difficulty": "Ultra-Hard",
     "text": "If PSU voltage fluctuates, which is MOST at risk?",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "Data corruption and hardware damage",
+      "B": "Software deletion only",
+      "C": "Printer malfunction only",
+      "D": "UI crash"
     },
     "answer": "A"
   },
   {
     "id": 14,
-    "topic": "ICT Advanced",
+    "topic": "Operating System",
     "difficulty": "Ultra-Hard",
     "text": "Removing OS will cause:",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "Slow processing",
+      "B": "No proper system startup",
+      "C": "Loss of RAM",
+      "D": "Printer error"
     },
     "answer": "B"
   },
   {
     "id": 15,
-    "topic": "ICT Advanced",
+    "topic": "Storage Choice",
     "difficulty": "Ultra-Hard",
     "text": "Which storage type is best for long-term, high-speed performance?",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "CD",
+      "B": "SSD",
+      "C": "RAM",
+      "D": "Cache"
     },
     "answer": "B"
   },
   {
     "id": 16,
-    "topic": "ICT Advanced",
+    "topic": "Trick",
     "difficulty": "Ultra-Hard",
     "text": "Which device is NOT dependent on software to function?",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "Printer",
+      "B": "Touchscreen",
+      "C": "Speaker",
+      "D": "None of the above"
     },
     "answer": "D"
   },
   {
     "id": 17,
-    "topic": "ICT Advanced",
+    "topic": "Performance",
     "difficulty": "Ultra-Hard",
     "text": "Increasing which component will NOT directly increase processing speed?",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "RAM",
+      "B": "Cache",
+      "C": "SSD",
+      "D": "Speaker"
     },
     "answer": "D"
   },
   {
     "id": 18,
-    "topic": "ICT Advanced",
+    "topic": "Internet",
     "difficulty": "Ultra-Hard",
     "text": "A computer can work without internet because:",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "Internet is hardware",
+      "B": "OS manages hardware locally",
+      "C": "PSU replaces internet",
+      "D": "Cloud stores CPU"
     },
     "answer": "B"
   },
   {
     "id": 19,
-    "topic": "ICT Advanced",
+    "topic": "BIOS",
     "difficulty": "Ultra-Hard",
     "text": "If BIOS is corrupted, system may:",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "Print wrong",
+      "B": "Fail to boot",
+      "C": "Lose sound",
+      "D": "Lose cloud"
     },
     "answer": "B"
   },
   {
     "id": 20,
-    "topic": "ICT Advanced",
+    "topic": "Portability",
     "difficulty": "Ultra-Hard",
     "text": "Which combination ensures maximum portability?",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "SSD + USB",
+      "B": "Internal HDD",
+      "C": "Cache",
+      "D": "PSU"
     },
     "answer": "A"
   },
   {
     "id": 21,
-    "topic": "ICT Advanced",
+    "topic": "OS Layer",
     "difficulty": "Ultra-Hard",
     "text": "Which layer connects software instructions to hardware actions?",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "API",
+      "B": "UI",
+      "C": "OS",
+      "D": "PSU"
     },
     "answer": "C"
   },
   {
     "id": 22,
-    "topic": "ICT Advanced",
+    "topic": "RAM Removed",
     "difficulty": "Ultra-Hard",
     "text": "Removing RAM but keeping HDD intact means:",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "Files are deleted",
+      "B": "System cannot run properly",
+      "C": "BIOS erased",
+      "D": "OS deleted"
     },
     "answer": "B"
   },
   {
     "id": 23,
-    "topic": "ICT Advanced",
+    "topic": "Multitasking",
     "difficulty": "Ultra-Hard",
     "text": "If system freezes during multitasking, what is likely insufficient?",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "Printer memory",
+      "B": "RAM",
+      "C": "Speaker",
+      "D": "PSU"
     },
     "answer": "B"
   },
   {
     "id": 24,
-    "topic": "ICT Advanced",
+    "topic": "Touchscreen",
     "difficulty": "Ultra-Hard",
     "text": "Which device can be both input and output AND relies on calibration software?",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "Scanner",
+      "B": "Touchscreen",
+      "C": "Printer",
+      "D": "Projector"
     },
     "answer": "B"
   },
   {
     "id": 25,
-    "topic": "ICT Advanced",
+    "topic": "Volatile Memory",
     "difficulty": "Ultra-Hard",
     "text": "Which memory is erased instantly after shutdown?",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "HDD",
+      "B": "SSD",
+      "C": "RAM",
+      "D": "Cloud"
     },
     "answer": "C"
   },
   {
     "id": 26,
-    "topic": "ICT Advanced",
+    "topic": "System Balance",
     "difficulty": "Ultra-Hard",
     "text": "Which is MOST responsible for overall system performance balance?",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "CPU + RAM + Storage speed",
+      "B": "Printer + Speaker",
+      "C": "PSU + Fan",
+      "D": "Cloud only"
     },
     "answer": "A"
   },
   {
     "id": 27,
-    "topic": "ICT Advanced",
+    "topic": "IPO Example",
     "difficulty": "Ultra-Hard",
     "text": "Which example best demonstrates IPO cycle?",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "Saving file only",
+      "B": "Watching video only",
+      "C": "Typing → Processing → Display",
+      "D": "Cooling system"
     },
     "answer": "C"
   },
   {
     "id": 28,
-    "topic": "ICT Advanced",
+    "topic": "OS Control",
     "difficulty": "Ultra-Hard",
     "text": "If OS manages hardware resources, what does it control?",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "CPU, RAM, Storage",
+      "B": "Printer ink only",
+      "C": "Monitor brightness only",
+      "D": "Mouse color"
     },
     "answer": "A"
   },
   {
     "id": 29,
-    "topic": "ICT Advanced",
+    "topic": "Cloud + Local + Output",
     "difficulty": "Ultra-Hard",
     "text": "A user uploads file to cloud, edits locally, prints copy. Which are used?",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "Cloud + Primary + Output",
+      "B": "Primary only",
+      "C": "Output only",
+      "D": "Secondary only"
     },
     "answer": "A"
   },
   {
     "id": 30,
-    "topic": "ICT Advanced",
+    "topic": "System Unit Failure",
     "difficulty": "Ultra-Hard",
     "text": "A complete failure of system unit will affect:",
     "options": {
-      "A": "Option A",
-      "B": "Option B",
-      "C": "Option C",
-      "D": "Option D"
+      "A": "Only sound",
+      "B": "Only display",
+      "C": "Entire computing process",
+      "D": "Only printing"
     },
     "answer": "C"
   }
@@ -1353,21 +1352,19 @@ const ultraHardQuestions = [
 
 assessments.push(
   {
-    id: 'ict-final-mock',
-    name: 'ICT Final Mock Test',
-    description: '60-question final mock assessment set.',
-    tags: ['ict','mock','final'],
+    id: 'ict-olympiad-final-mock',
+    name: 'ICT OLYMPIAD – FINAL MOCK TEST (Practice Version)',
+    description: '60-question final mock exam (practice version) with answers and mixed difficulty.',
+    tags: ['ict', 'olympiad', 'mock', 'practice'],
     questions: finalMockQuestions
   },
   {
-    id: 'ict-ultra-hard',
-    name: 'ICT Ultra-Hard Challenge Set',
-    description: 'Advanced analytical ICT challenge questions.',
-    tags: ['ict','challenge','advanced'],
+    id: 'ict-olympiad-ultra-hard',
+    name: 'ULTRA-HARD ICT OLYMPIAD CHALLENGE SET (Practice Version)',
+    description: '30-question ultra-hard challenge set (practice version) with multi-concept and logic-driven items.',
+    tags: ['ict', 'olympiad', 'ultra-hard', 'challenge', 'practice'],
     questions: ultraHardQuestions
   }
 );
 
 window.assessments = assessments;
-
-
